@@ -4,7 +4,7 @@ public class Boat
 	private String type;
 	private String direction;
 	private Position[] positions;
-    private boolean[] hits;
+	private boolean[] hits;
 	
 	public Boat(String t, Position p, String dir)
 	{
@@ -12,6 +12,7 @@ public class Boat
 		direction = dir;
 		this.setPositions(p);
 	}
+	
 	
 	private void setPositions(Position start)
 	{
@@ -52,12 +53,12 @@ public class Boat
 		}
 	}
 	
-	public String name()
+    public String name()
 	{
 		return type;
 	}
 	
-	public char abbreviation()
+    public char abbreviation()
 	{
 		char[] typeArray = type.toCharArray();
 		return typeArray[0];
