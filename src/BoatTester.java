@@ -37,7 +37,7 @@ public class BoatTester
     {
         System.out.println("TESTING name()");
 		System.out.println("TESTING ARICRAFT CARRIER: 'AIRCRAFT CARRIER' EXPECTED " + aircraftCarrier.name());
-		System.out.println("TESTING BATTLESHIP: 'BATTLESHIP' EXPECTED" + battleship.name());
+		System.out.println("TESTING BATTLESHIP: 'BATTLESHIP' EXPECTED " + battleship.name());
 		System.out.println("TESTING CRUISER: 'CRUISER EXPECTED' " + cruiser.name());
 		System.out.println("TESTING SUBMARINE: 'SUBMARINE' EXPECTED " + submarine.name());
 		System.out.println("TESTING DESTROYER: 'DESTROYER EXPECTED' " + destroyer.name());
@@ -56,7 +56,7 @@ public class BoatTester
     public static void testSize()
     {
         System.out.println("TESTING size()");
-		System.out.println("TESTING AIRCRAFT CARRIER: '5' EXCEPTED " + aircraftCarrier.size());
+		System.out.println("TESTING AIRCRAFT CARRIER: '5' EXPECTED " + aircraftCarrier.size());
 		System.out.println("TESTING BATTLESHIP: '4' EXPECTED " + battleship.size());
 		System.out.println("TESTING CRUISER: '3' EXPECTED " + cruiser.size());
 		System.out.println("TESTING SUBMARINE: '3' EXPECTED " + submarine.size());
