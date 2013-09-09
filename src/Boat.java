@@ -24,12 +24,12 @@ public class Boat
         //\TESTER
 		switch(abrv)
 		{
-			case 'A': length = 5;
+            case 'A': length = 5;
 			case 'B': length = 4;
 			case 'C': length = 3;
 			case 'S': length = 3;
 			case 'D': length = 2;
-			default: length = 0;
+            default: length = -1;
 		}
 		
 		positions = new Position[length];
