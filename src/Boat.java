@@ -19,17 +19,25 @@ public class Boat
 		int length;
 		char abrv;
         abrv = this.abbreviation();
-        //TESTER
-        System.out.println(abrv);
-        //\TESTER
 		switch(abrv)
 		{
-            case 'A': length = 5;
-			case 'B': length = 4;
-			case 'C': length = 3;
-			case 'S': length = 3;
-			case 'D': length = 2;
-            default: length = -1;
+			case 'A':
+                length = 5;
+				break;
+			case 'B':
+                length = 4;
+				break;
+			case 'C':
+                length = 3;
+				break;
+			case 'S':
+				length = 3;
+				break;
+			case 'D':
+				length = 2;
+				break;
+            default:
+				length = -1;
 		}
 		
 		positions = new Position[length];
@@ -42,18 +50,16 @@ public class Boat
 		
 		for(int i = 1; i < length; i++)
 		{
-			if (this.direction.equals("horizontal"))
-			{	
-				positions[i] = new Position(start.columnIndex() + 1, start.rowIndex());
-			}
-			else if (this.direction.equals("vertical"))
-			{
-				positions[i] = new Position(start.columnIndex(), start.rowIndex() + 1);
-			}
-			else
-			{
-				//FFFFFFFFFFFFUUUUUUUUUUUUUUUUUUUUUUU-
-			}
+            switch (this.direction) {
+                case "horizontal":
+                    positions[i] = new Position(start.columnIndex() + 1, start.rowIndex());
+                    break;
+                case "vertical":
+                    positions[i] = new Position(start.columnIndex(), start.rowIndex() + 1);
+                    break;
+                default:
+                    break;
+            }
 		}
 	}
 	
