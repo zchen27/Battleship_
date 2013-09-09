@@ -16,7 +16,8 @@ public class BoatTester
     
     public static void main(String[] args)
     {
-        aircraftCarrier = new Boat("Aircraft Carrier", new Position(0, 2), "vertical");
+        System.out.println("TESTING Boat(), NO EXCEPTIONS SHOULD OCCUR");
+		aircraftCarrier = new Boat("Aircraft Carrier", new Position(0, 2), "vertical");
         battleship = new Boat("Battleship", new Position(3, 5), "horizontal");
         cruiser = new Boat("Cruiser", new Position(4, 6), "horizontal");
         submarine = new Boat("Submarine", new Position(9, 1), "vertical");
@@ -28,9 +29,12 @@ public class BoatTester
         leftBoat = new Boat("Cruiser", new Position(0, 3), "vertical");
         rightBoat = new Boat("Submarine", new Position(9, 4), "vertical");
         centreBoat = new Boat("Battlecruiser", new Position(3, 5), "horizontal");
+		System.out.println("");
 		testName();
 		testAbbreviation();
 		testSize();
+		testPosition();
+		testDirection();
     }
     
     public static void testName()
@@ -41,6 +45,7 @@ public class BoatTester
 		System.out.println("TESTING CRUISER: 'CRUISER EXPECTED' " + cruiser.name());
 		System.out.println("TESTING SUBMARINE: 'SUBMARINE' EXPECTED " + submarine.name());
 		System.out.println("TESTING DESTROYER: 'DESTROYER EXPECTED' " + destroyer.name());
+		System.out.println("");
     }
     
     public static void testAbbreviation()
@@ -51,6 +56,7 @@ public class BoatTester
 		System.out.println("TESTING CRUISER: 'C' EXPECTED " + cruiser.abbreviation());
 		System.out.println("TESTING SUBMARINE: 'S' EXPECTED " + submarine.abbreviation());
 		System.out.println("TESTING DESTROYER: 'D' EXPECTED " + destroyer.abbreviation());
+		System.out.println("");
     }
     
     public static void testSize()
@@ -61,7 +67,25 @@ public class BoatTester
 		System.out.println("TESTING CRUISER: '3' EXPECTED " + cruiser.size());
 		System.out.println("TESTING SUBMARINE: '3' EXPECTED " + submarine.size());
 		System.out.println("TESTING DESTROYER: '2' EXPECTED " + destroyer.size());
+		System.out.println("");
     }
+	
+	public static void testPosition()
+	{
+		System.out.println("TESTING position()");
+		System.out.println("TESTING TOP BOAT: POSITION ON TOP EXPECTED " + topBoat.position());
+		System.out.println("TESTING BOTTOM BOAT: POSITION ON BOTTOM EXPECTED " + bottomBoat.position());
+		System.out.println("TESTING LEFT BOAT: POSITION ON LEFT EXPECTED " + leftBoat.position());
+		System.out.println("TESTING RIGHT BOAT: POSITION ON RIGHT EXPECTED " + rightBoat.position());
+		System.out.println("");
+	}
     
+	public static void testDirection()
+	{
+		System.out.println("TESTING direction()");
+		System.out.println("TESTING VERTICAL BOAT: 'VERTICAL' EXPECTED " + verticalBoat.direction());
+		System.out.println("TESTING HORIZONTAL BOAT: 'HORIZONTAL' EXPECTED " + horizontalBoat.direction());
+		System.out.println("");
+	}
     
 }

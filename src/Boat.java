@@ -9,6 +9,7 @@ public class Boat
 	public Boat(String t, Position p, String dir)
 	{
 		type = t;
+		dir = dir.toUpperCase();
 		direction = dir;
 		this.setPositions(p);
 	}
@@ -48,22 +49,30 @@ public class Boat
             hits[i] = false;
         }
 		
+		int col = start.columnIndex();
+		int row = start.rowIndex();
 		for(int i = 1; i < length; i++)
 		{
-            switch (this.direction) {
-                case "horizontal":
-                    positions[i] = new Position(start.columnIndex() + 1, start.rowIndex());
-                    break;
-                case "vertical":
-                    positions[i] = new Position(start.columnIndex(), start.rowIndex() + 1);
-                    break;
-                default:
-                    break;
-            }
+			if(this.direction .equals ("HORIZONTAL"))
+			{
+				positions[i] = new Position(start.columnIndex() + 1, start.rowIndex());
+			}    
+			else if(this.direction .equals ("HORIZONTAL"))
+			{
+				positions[i] = new Position(start.columnIndex(), start.rowIndex() + 1);
+			}
 		}
+		
+		//PULSECHECK
+		System.out.println(direction);
+		for(int i = 0; i < length; i++)
+		{
+            System.out.print(positions[i] + " ");
+		}
+		System.out.println("");
+		//\PulseCheck
 	}
-	
-    public String name()
+	    public String name()
 	{
 		return type;
 	}
@@ -84,6 +93,11 @@ public class Boat
     {
         return positions.length;
     }
+	
+	public Position position()
+	{
+		return positions[0];
+	}
 	
 	public boolean onBoat(Position test)
 	{
@@ -129,5 +143,4 @@ public class Boat
         }
         return false;
     }
-	
 }
