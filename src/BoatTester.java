@@ -16,7 +16,7 @@ public class BoatTester
     
     public static void main(String[] args)
     {
-        System.out.println("TESTING Boat(), NO EXCEPTIONS SHOULD OCCUR");
+		System.out.println("TESTING Boat(), NO EXCEPTIONS SHOULD OCCUR");
 		aircraftCarrier = new Boat("Aircraft Carrier", new Position(0, 2), "vertical");
         battleship = new Boat("Battleship", new Position(3, 5), "horizontal");
         cruiser = new Boat("Cruiser", new Position(4, 6), "horizontal");
@@ -37,38 +37,38 @@ public class BoatTester
 		testDirection();
     }
     
-    public static void testName()
-    {
-        System.out.println("TESTING name()");
+	public static void testName()
+	{
+		System.out.println("TESTING name()");
 		System.out.println("TESTING ARICRAFT CARRIER: 'AIRCRAFT CARRIER' EXPECTED " + aircraftCarrier.name());
 		System.out.println("TESTING BATTLESHIP: 'BATTLESHIP' EXPECTED " + battleship.name());
 		System.out.println("TESTING CRUISER: 'CRUISER EXPECTED' " + cruiser.name());
 		System.out.println("TESTING SUBMARINE: 'SUBMARINE' EXPECTED " + submarine.name());
 		System.out.println("TESTING DESTROYER: 'DESTROYER EXPECTED' " + destroyer.name());
 		System.out.println("");
-    }
+	}
     
-    public static void testAbbreviation()
-    {
-        System.out.println("TESTING abbreviation()");
+	public static void testAbbreviation()
+	{
+		System.out.println("TESTING abbreviation()");
 		System.out.println("TESTING AIRCRAFT CARRIER: 'A' EXPECTED " + aircraftCarrier.abbreviation());
 		System.out.println("TESTING BATTLESHIP: 'B' EXPECTED " + battleship.abbreviation());
 		System.out.println("TESTING CRUISER: 'C' EXPECTED " + cruiser.abbreviation());
 		System.out.println("TESTING SUBMARINE: 'S' EXPECTED " + submarine.abbreviation());
 		System.out.println("TESTING DESTROYER: 'D' EXPECTED " + destroyer.abbreviation());
 		System.out.println("");
-    }
+	}
     
-    public static void testSize()
-    {
-        System.out.println("TESTING size()");
+	public static void testSize()
+	{
+		System.out.println("TESTING size()");
 		System.out.println("TESTING AIRCRAFT CARRIER: '5' EXPECTED " + aircraftCarrier.size());
 		System.out.println("TESTING BATTLESHIP: '4' EXPECTED " + battleship.size());
 		System.out.println("TESTING CRUISER: '3' EXPECTED " + cruiser.size());
 		System.out.println("TESTING SUBMARINE: '3' EXPECTED " + submarine.size());
 		System.out.println("TESTING DESTROYER: '2' EXPECTED " + destroyer.size());
 		System.out.println("");
-    }
+	}
 	
 	public static void testPosition()
 	{
@@ -87,5 +87,7 @@ public class BoatTester
 		System.out.println("TESTING HORIZONTAL BOAT: 'HORIZONTAL' EXPECTED " + horizontalBoat.direction());
 		System.out.println("");
 	}
+	
+	
     
 }
