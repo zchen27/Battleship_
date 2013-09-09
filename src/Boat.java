@@ -19,6 +19,9 @@ public class Boat
 		int length;
 		char abrv;
         abrv = this.abbreviation();
+        //TESTER
+        System.out.println(abrv);
+        //\TESTER
 		switch(abrv)
 		{
 			case 'A': length = 5;
