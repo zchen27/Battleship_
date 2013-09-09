@@ -17,17 +17,17 @@ public class BoatTester
     public static void main(String[] args)
     {
         aircraftCarrier = new Boat("Aircraft Carrier", new Position(0, 2), "vertical");
-	battleship = new Boat("Battleship", new Position(3, 5), "horizontal");
-	cruiser = new Boat("Cruiser", new Position(4, 6), "horizontal");
-	submarine = new Boat("Submarine", new Position(9, 1), "vertical");
-	destroyer = new Boat("Destroyer", new Position(8, 7), "horizontal");
-	horizontalBoat = new Boat("Battleship", new Position(6, 9), "horizontal");
-	verticalBoat = new Boat("Cruiser", new Position(0, 3), "vertical");
-	topBoat = new Boat("Submarine", new Position(3, 0), "horizontal");
-	bottomBoat = new Boat("Battleshipr", new Position(5, 9), "horizontal");
-	leftBoat = new Boat("Cruiser", new Position(0, 3), "vertical");
-	rightBoat = new Boat("Submarine", new Position(9, 4), "vertical");
-	centreBoat = new Boat("Battlecruiser", new Position(3, 5), "horizontal");
+        battleship = new Boat("Battleship", new Position(3, 5), "horizontal");
+        cruiser = new Boat("Cruiser", new Position(4, 6), "horizontal");
+        submarine = new Boat("Submarine", new Position(9, 1), "vertical");
+        destroyer = new Boat("Destroyer", new Position(8, 7), "horizontal");
+        horizontalBoat = new Boat("Battleship", new Position(6, 9), "horizontal");
+        verticalBoat = new Boat("Cruiser", new Position(0, 3), "vertical");
+        topBoat = new Boat("Submarine", new Position(3, 0), "horizontal");
+        bottomBoat = new Boat("Battleshipr", new Position(5, 9), "horizontal");
+        leftBoat = new Boat("Cruiser", new Position(0, 3), "vertical");
+        rightBoat = new Boat("Submarine", new Position(9, 4), "vertical");
+        centreBoat = new Boat("Battlecruiser", new Position(3, 5), "horizontal");
     }
     
     public static void testBoat()

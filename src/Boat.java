@@ -17,7 +17,8 @@ public class Boat
 	private void setPositions(Position start)
 	{
 		int length;
-		char abrv = this.abbreviation();
+		char abrv;
+        abrv = this.abbreviation();
 		switch(abrv)
 		{
 			case 'A': length = 5;
@@ -60,7 +61,8 @@ public class Boat
 	
     public char abbreviation()
 	{
-		char[] typeArray = type.toCharArray();
+		type = type.toUpperCase();
+        char[] typeArray = type.toCharArray();
 		return typeArray[0];
 	}
     
