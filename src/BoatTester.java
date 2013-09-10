@@ -114,20 +114,25 @@ public class BoatTester
 		System.out.println("TESTING TOP BOAT AT D-1: TRUE EXPECTED " + topBoat.onBoat(new Position('D', 1)));
 		System.out.println("TESTING TOP BOAT AT E-1: TRUE EXPECTED " + topBoat.onBoat(new Position('E', 1)));
 		System.out.println("TESTING TOP BOAT AT F-1: TRUE EXPECTED " + topBoat.onBoat(new Position('F', 1)));
+		System.out.println("TESTING TOP BOAT AT G-1: FALSE EXPECTED " + topBoat.onBoat(new Position('G', 1)));
 		System.out.println("TESTING BOTTOM BOAT AT F-10: TRUE EXPECTED " + bottomBoat.onBoat(new Position('F', 10)));
 		System.out.println("TESTING BOTTOM BOAT AT G-10: TRUE EXPECTED " + bottomBoat.onBoat(new Position('G', 10)));
 		System.out.println("TESTING BOTTOM BOAT AT H-10: TRUE EXPECTED " + bottomBoat.onBoat(new Position('H', 10)));
 		System.out.println("TESTING BOTTOM BOAT AT I-10: TRUE EXPECTED " + bottomBoat.onBoat(new Position('I', 10)));
+		System.out.println("TESTING BOTTOM BOAT AT I-11: FALSE EXPECTED " + bottomBoat.onBoat(new Position('I', 11)));
 		System.out.println("TESTING LEFT BOAT AT A-4: TRUE EXPECTED " + leftBoat.onBoat(new Position('A', 4)));
 		System.out.println("TESTING LEFT BOAT AT A-5: TRUE EXPECTED " + leftBoat.onBoat(new Position('A', 5)));
 		System.out.println("TESTING LEFT BOAT AT A-6: TRUE EXPECTED " + leftBoat.onBoat(new Position('A', 6)));
+		System.out.println("TESTING LEFT BOAT AT A-3: FALSE EXPECTED " + leftBoat.onBoat(new Position('A', 3)));
 		System.out.println("TESTING RIGHT BOAT AT J-5: TRUE EXPECTED " + rightBoat.onBoat(new Position('J', 5)));
 		System.out.println("TESTING RIGHT BOAT AT J-6: TRUE EXPECTED " + rightBoat.onBoat(new Position('J', 6)));
 		System.out.println("TESTING RIGHT BOAT AT J-7: TRUE EXPECTED " + rightBoat.onBoat(new Position('J', 7)));
+		System.out.println("TESTING RIGHT BOAT AT H-4: FALSE EXPECTED " + rightBoat.onBoat(new Position('H', 4)));
 		System.out.println("TESTING CENTRE BOAT AT D-6: TRUE EXPECTED " + centreBoat.onBoat(new Position('D', 6)));
 		System.out.println("TESTING CENTRE BOAT AT E-6: TRUE EXPECTED " + centreBoat.onBoat(new Position('E', 6)));
 		System.out.println("TESTING CENTRE BOAT AT F-6: TRUE EXPECTED " + centreBoat.onBoat(new Position('F', 6)));
 		System.out.println("TESTING CENTRE BOAT AT G-6: TRUE EXPECTED " + centreBoat.onBoat(new Position('G', 6)));
+		System.out.println("TESTING CENTRE BOAT AT C-6: FALSE EXPECTED " + centreBoat.onBoat(new Position('C', 6)));
 	    System.out.println("");
 	}
 	
