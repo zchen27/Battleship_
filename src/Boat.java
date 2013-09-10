@@ -48,18 +48,16 @@ public class Boat
         {
             hits[i] = false;
         }
-		
-		int col = start.columnIndex();
-		int row = start.rowIndex();
+
 		for(int i = 1; i < length; i++)
 		{
 			if(this.direction .equals ("HORIZONTAL"))
 			{
-				positions[i] = new Position(start.columnIndex() + 1, start.rowIndex());
+				positions[i] = new Position(start.columnIndex() + i, start.rowIndex());
 			}    
-			else if(this.direction .equals ("HORIZONTAL"))
+			else if(this.direction .equals ("VERTICAL"))
 			{
-				positions[i] = new Position(start.columnIndex(), start.rowIndex() + 1);
+				positions[i] = new Position(start.columnIndex(), start.rowIndex() + i);
 			}
 		}
 		

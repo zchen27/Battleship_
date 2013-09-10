@@ -88,6 +88,12 @@ public class BoatTester
 		System.out.println("");
 	}
 	
+	public static void testOnBoat()
+	{
+	    System.out.println("TESTING onBoat()");
+	    System.out.println("");
+	}
+	
 	
     
 }
