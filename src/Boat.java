@@ -62,7 +62,7 @@ public class Boat
 		}
 		
 		//PULSECHECK
-		System.out.println(direction);
+		System.out.println(direction + " " + type + " STARTING AT " + positions[0]);
 		for(int i = 0; i < length; i++)
 		{
             System.out.print(positions[i] + " ");
@@ -122,7 +122,7 @@ public class Boat
     {
         for(int i = 0; i < positions.length; i++)   
         {
-            if(positions[i].equals(test))
+			if(positions[i].rowIndex() == test.rowIndex() && positions[i].columnIndex() == test.columnIndex())
             {
                 return i;
             }

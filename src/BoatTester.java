@@ -16,26 +16,45 @@ public class BoatTester
     
     public static void main(String[] args)
     {
-		System.out.println("TESTING Boat(), NO EXCEPTIONS SHOULD OCCUR");
-		aircraftCarrier = new Boat("Aircraft Carrier", new Position(0, 2), "vertical");
-        battleship = new Boat("Battleship", new Position(3, 5), "horizontal");
-        cruiser = new Boat("Cruiser", new Position(4, 6), "horizontal");
-        submarine = new Boat("Submarine", new Position(9, 1), "vertical");
-        destroyer = new Boat("Destroyer", new Position(8, 7), "horizontal");
-        horizontalBoat = new Boat("Battleship", new Position(6, 9), "horizontal");
-        verticalBoat = new Boat("Cruiser", new Position(0, 3), "vertical");
-        topBoat = new Boat("Submarine", new Position(3, 0), "horizontal");
-        bottomBoat = new Boat("Battleshipr", new Position(5, 9), "horizontal");
-        leftBoat = new Boat("Cruiser", new Position(0, 3), "vertical");
-        rightBoat = new Boat("Submarine", new Position(9, 4), "vertical");
-        centreBoat = new Boat("Battlecruiser", new Position(3, 5), "horizontal");
-		System.out.println("");
+		testBoat();
 		testName();
 		testAbbreviation();
 		testSize();
 		testPosition();
 		testDirection();
+		testPosition();
+		testOnBoat();
     }
+	
+	public static void testBoat()
+	{
+		System.out.println("TESTING Boat(), NO EXCEPTIONS SHOULD OCCUR");
+		System.out.println("TESTINING 'Aircraft Carrier'");
+		aircraftCarrier = new Boat("Aircraft Carrier", new Position(0, 2), "vertical");
+        System.out.println("TESTING 'Battleship'");
+		battleship = new Boat("Battleship", new Position(3, 5), "horizontal");
+        System.out.println("TESTING 'Cruiser'");
+		cruiser = new Boat("Cruiser", new Position(4, 6), "horizontal");
+        System.out.println("TESING 'Submarine'");
+		submarine = new Boat("Submarine", new Position(9, 1), "vertical");
+        System.out.println("TESTING 'Destroyer'");
+		destroyer = new Boat("Destroyer", new Position(8, 7), "horizontal");
+        System.out.println("TESTING 'Horizontal'");
+		horizontalBoat = new Boat("Battleship", new Position(6, 9), "horizontal");
+        System.out.println("TESTING 'Vertical'");
+		verticalBoat = new Boat("Cruiser", new Position(0, 3), "vertical");
+        System.out.println("TESTING POSITION ON TOP");
+		topBoat = new Boat("Submarine", new Position(3, 0), "horizontal");
+        System.out.println("TESTING POSITION ON BOTTOM");
+		bottomBoat = new Boat("Battleship", new Position(5, 9), "horizontal");
+        System.out.println("TESTING POSITION ON LEFT");
+		leftBoat = new Boat("Cruiser", new Position(0, 3), "vertical");
+        System.out.println("TESTING POSITION ON RIGHT");
+		rightBoat = new Boat("Submarine", new Position(9, 4), "vertical");
+        System.out.println("TESTING POSITION ON RIGHT");
+		centreBoat = new Boat("Battleship", new Position(3, 5), "horizontal");
+		System.out.println("");
+	}
     
 	public static void testName()
 	{
@@ -69,16 +88,6 @@ public class BoatTester
 		System.out.println("TESTING DESTROYER: '2' EXPECTED " + destroyer.size());
 		System.out.println("");
 	}
-	
-	public static void testPosition()
-	{
-		System.out.println("TESTING position()");
-		System.out.println("TESTING TOP BOAT: POSITION ON TOP EXPECTED " + topBoat.position());
-		System.out.println("TESTING BOTTOM BOAT: POSITION ON BOTTOM EXPECTED " + bottomBoat.position());
-		System.out.println("TESTING LEFT BOAT: POSITION ON LEFT EXPECTED " + leftBoat.position());
-		System.out.println("TESTING RIGHT BOAT: POSITION ON RIGHT EXPECTED " + rightBoat.position());
-		System.out.println("");
-	}
     
 	public static void testDirection()
 	{
@@ -88,9 +97,37 @@ public class BoatTester
 		System.out.println("");
 	}
 	
+		public static void testPosition()
+	{
+		System.out.println("TESTING position()");
+		System.out.println("TESTING TOP BOAT: POSITION ON TOP EXPECTED " + topBoat.position());
+		System.out.println("TESTING BOTTOM BOAT: POSITION ON BOTTOM EXPECTED " + bottomBoat.position());
+		System.out.println("TESTING LEFT BOAT: POSITION ON LEFT EXPECTED " + leftBoat.position());
+		System.out.println("TESTING RIGHT BOAT: POSITION ON RIGHT EXPECTED " + rightBoat.position());
+		System.out.println("TESTING CENTRE BOAT: POSITION IN CENTRE EXPECTED " + centreBoat.position());
+		System.out.println("");
+	}
+	
 	public static void testOnBoat()
 	{
 	    System.out.println("TESTING onBoat()");
+		System.out.println("TESTING TOP BOAT AT D-1: TRUE EXPECTED " + topBoat.onBoat(new Position('D', 1)));
+		System.out.println("TESTING TOP BOAT AT E-1: TRUE EXPECTED " + topBoat.onBoat(new Position('E', 1)));
+		System.out.println("TESTING TOP BOAT AT F-1: TRUE EXPECTED " + topBoat.onBoat(new Position('F', 1)));
+		System.out.println("TESTING BOTTOM BOAT AT F-10: TRUE EXPECTED " + bottomBoat.onBoat(new Position('F', 10)));
+		System.out.println("TESTING BOTTOM BOAT AT G-10: TRUE EXPECTED " + bottomBoat.onBoat(new Position('G', 10)));
+		System.out.println("TESTING BOTTOM BOAT AT H-10: TRUE EXPECTED " + bottomBoat.onBoat(new Position('H', 10)));
+		System.out.println("TESTING BOTTOM BOAT AT I-10: TRUE EXPECTED " + bottomBoat.onBoat(new Position('I', 10)));
+		System.out.println("TESTING LEFT BOAT AT A-4: TRUE EXPECTED " + leftBoat.onBoat(new Position('A', 4)));
+		System.out.println("TESTING LEFT BOAT AT A-5: TRUE EXPECTED " + leftBoat.onBoat(new Position('A', 5)));
+		System.out.println("TESTING LEFT BOAT AT A-6: TRUE EXPECTED " + leftBoat.onBoat(new Position('A', 6)));
+		System.out.println("TESTING RIGHT BOAT AT J-5: TRUE EXPECTED " + rightBoat.onBoat(new Position('J', 5)));
+		System.out.println("TESTING RIGHT BOAT AT J-6: TRUE EXPECTED " + rightBoat.onBoat(new Position('J', 6)));
+		System.out.println("TESTING RIGHT BOAT AT J-7: TRUE EXPECTED " + rightBoat.onBoat(new Position('J', 7)));
+		System.out.println("TESTING CENTRE BOAT AT D-6: TRUE EXPECTED " + centreBoat.onBoat(new Position('D', 6)));
+		System.out.println("TESTING CENTRE BOAT AT E-6: TRUE EXPECTED " + centreBoat.onBoat(new Position('E', 6)));
+		System.out.println("TESTING CENTRE BOAT AT F-6: TRUE EXPECTED " + centreBoat.onBoat(new Position('F', 6)));
+		System.out.println("TESTING CENTRE BOAT AT G-6: TRUE EXPECTED " + centreBoat.onBoat(new Position('G', 6)));
 	    System.out.println("");
 	}
 	

@@ -73,6 +73,7 @@ public class Position
 		return row;
 	}
 	
+	@Override
 	public String toString()
 	{
 		return this.col() + "-" + this.row();
