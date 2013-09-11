@@ -133,7 +133,7 @@ public class BoatTester
 		System.out.println("TESTING CENTRE BOAT AT F-6: TRUE EXPECTED " + centreBoat.onBoat(new Position('F', 6)));
 		System.out.println("TESTING CENTRE BOAT AT G-6: TRUE EXPECTED " + centreBoat.onBoat(new Position('G', 6)));
 		System.out.println("TESTING CENTRE BOAT AT C-6: FALSE EXPECTED " + centreBoat.onBoat(new Position('C', 6)));
-	    System.out.println("");
+		System.out.println("");
 	}
 	
 	
