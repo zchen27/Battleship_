@@ -118,6 +118,12 @@ public class Boat
        }
     }
     
+    public boolean isHit(Position test)
+    {
+        int i = indexOf(test);
+        return hits[i];
+    }
+    
     private int indexOf(Position test)
     {
         for(int i = 0; i < positions.length; i++)   

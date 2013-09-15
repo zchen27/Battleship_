@@ -24,6 +24,7 @@ public class BoatTester
 		testDirection();
 		testPosition();
 		testOnBoat();
+                testHit();
     }
 	
 	public static void testBoat()
@@ -110,11 +111,11 @@ public class BoatTester
 	
 	public static void testOnBoat()
 	{
-	    System.out.println("TESTING onBoat()");
-		System.out.println("TESTING TOP BOAT AT D-1: TRUE EXPECTED " + topBoat.onBoat(new Position('D', 1)));
-		System.out.println("TESTING TOP BOAT AT E-1: TRUE EXPECTED " + topBoat.onBoat(new Position('E', 1)));
-		System.out.println("TESTING TOP BOAT AT F-1: TRUE EXPECTED " + topBoat.onBoat(new Position('F', 1)));
-		System.out.println("TESTING TOP BOAT AT G-1: FALSE EXPECTED " + topBoat.onBoat(new Position('G', 1)));
+                System.out.println("TESTING onBoat()");
+                System.out.println("TESTING TOP BOAT AT D-1: TRUE EXPECTED " + topBoat.onBoat(new Position('D', 1)));
+                System.out.println("TESTING TOP BOAT AT E-1: TRUE EXPECTED " + topBoat.onBoat(new Position('E', 1)));
+                System.out.println("TESTING TOP BOAT AT F-1: TRUE EXPECTED " + topBoat.onBoat(new Position('F', 1)));
+                System.out.println("TESTING TOP BOAT AT G-1: FALSE EXPECTED " + topBoat.onBoat(new Position('G', 1)));
 		System.out.println("TESTING BOTTOM BOAT AT F-10: TRUE EXPECTED " + bottomBoat.onBoat(new Position('F', 10)));
 		System.out.println("TESTING BOTTOM BOAT AT G-10: TRUE EXPECTED " + bottomBoat.onBoat(new Position('G', 10)));
 		System.out.println("TESTING BOTTOM BOAT AT H-10: TRUE EXPECTED " + bottomBoat.onBoat(new Position('H', 10)));
@@ -136,5 +137,87 @@ public class BoatTester
 		System.out.println("");
 	}
 	
-	
+	public static void testIsHit()
+        {
+            System.out.println("TESTING isHit()");
+            System.out.println("TESTING TOP BOAT AT D-1: FALSE EXPECTED " + topBoat.isHit(new Position('D', 1)));
+            System.out.println("TESTING TOP BOAT AT E-1: FALSE EXPECTED " + topBoat.isHit(new Position('E', 1)));
+            System.out.println("TESTING TOP BOAT AT F-1: FALSE EXPECTED " + topBoat.isHit(new Position('F', 1)));
+            System.out.println("TESTING TOP BOAT AT G-1: FALSE EXPECTED " + topBoat.isHit(new Position('G', 1)));
+            System.out.println("TESTING BOTTOM BOAT AT F-10: FALSE EXPECTED " + bottomBoat.isHit(new Position('F', 10)));
+            System.out.println("TESTING BOTTOM BOAT AT G-10: FALSE EXPECTED " + bottomBoat.isHit(new Position('G', 10)));
+            System.out.println("TESTING BOTTOM BOAT AT H-10: FALSE EXPECTED " + bottomBoat.isHit(new Position('H', 10)));
+            System.out.println("TESTING BOTTOM BOAT AT I-10: FALSE EXPECTED " + bottomBoat.isHit(new Position('I', 10)));
+            System.out.println("TESTING LEFT BOAT AT A-4: FALSE EXPECTED " + leftBoat.isHit(new Position('A', 4)));
+            System.out.println("TESTING LEFT BOAT AT A-5: FALSE EXPECTED " + leftBoat.isHit(new Position('A', 5)));
+            System.out.println("TESTING LEFT BOAT AT A-6: FALSE EXPECTED " + leftBoat.isHit(new Position('A', 6)));
+            System.out.println("TESTING RIGHT BOAT AT J-5: FALSE EXPECTED " + rightBoat.isHit(new Position('J', 5)));
+            System.out.println("TESTING RIGHT BOAT AT J-6: FALSE EXPECTED " + rightBoat.isHit(new Position('J', 6)));
+            System.out.println("TESTING RIGHT BOAT AT J-7: FALSE EXPECTED " + rightBoat.isHit(new Position('J', 7)));
+            System.out.println("TESTING CENTRE BOAT AT D-6: TRUE EXPECTED " + centreBoat.isHit(new Position('D', 6)));
+            System.out.println("TESTING CENTRE BOAT AT E-6: TRUE EXPECTED " + centreBoat.isHit(new Position('E', 6)));
+            System.out.println("TESTING CENTRE BOAT AT F-6: TRUE EXPECTED " + centreBoat.isHit(new Position('F', 6)));
+            System.out.println("TESTING CENTRE BOAT AT G-6: TRUE EXPECTED " + centreBoat.isHit(new Position('G', 6)));     
+       }
+       
+       public static void testHit()
+       {
+           topBoat.hit(new Position('F', 1));
+           bottomBoat.hit(new Position('G', 10));
+           leftBoat.hit(new Position('A', 5));
+           rightBoat.hit(new Position('J', 6));
+           centreBoat.hit(new Position('E', 6));
+           System.out.println("TESTING hit()");
+           System.out.println("TESTING TOP BOAT AT F-1: TRUE EXPECTED " + topBoat.isHit(new Position('F', 1)));
+           System.out.println("TESTING TOP BOAT AT E-1: FALSE EXPECTED " + topBoat.isHit(new Position('E', 1)));
+           System.out.println("TESTING TOP BOAT AT E-2: FALSE EXPECTED " + topBoat.isHit(new Position('E', 2)));
+           System.out.println("TESTING TOP BOAT AT F-2: FALSE EXPECTED " + topBoat.isHit(new Position('F', 2)));
+           System.out.println("TESTING TOP BOAT AT G-1: FALSE EXPECTED " + topBoat.isHit(new Position('G', 1)));
+           System.out.println("TESTING TOP BOAT AT G-2: FALSE EXPECTED " + topBoat.isHit(new Position('G', 2)));
+           System.out.println("TESTING BOTTOM BOAT AT G-10: TRUE EXPECTED " + bottomBoat.isHit(new Position('G', 10)));
+           System.out.println("TESTING BOTTOM BOAT AT F-9: FALSE EXPECTED " + bottomBoat.isHit(new Position('F', 9)));
+           System.out.println("TESTING BOTTOM BOAT AT F-10: FALSE EXPECTED " + bottomBoat.isHit(new Position('F', 10)));
+           System.out.println("TESTING BOTTOM BOAT AT G-9: FALSE EXPECTED " + bottomBoat.isHit(new Position('G', 9)));
+           System.out.println("TESTING BOTTOM BOAT AT H-19 FALSE EXPECTED " + bottomBoat.isHit(new Position('H', 9)));
+           System.out.println("TESTING BOTTOM BOAT AT H-10: FALSE EXPECTED " + bottomBoat.isHit(new Position('H', 10)));
+           System.out.println("TESTING LEFT BOAT AT A-5: TRUE EXPECTED " + leftBoat.isHit(new Position('F', 1)));
+           System.out.println("TESTING LEFT BOAT AT A-4: FALSE EXPECTED " + leftBoat.isHit(new Position('A', 4)));
+           System.out.println("TESTING LEFT BOAT AT A-6: FALSE EXPECTED " + leftBoat.isHit(new Position('A', 6)));
+           System.out.println("TESTING LEFT BOAT AT B-4: FALSE EXPECTED " + leftBoat.isHit(new Position('B', 4)));
+           System.out.println("TESTING LEFT BOAT AT B-5: FALSE EXPECTED " + leftBoat.isHit(new Position('B', 5)));
+           System.out.println("TESTING LEFT BOAT AT B-6: FALSE EXPECTED " + leftBoat.isHit(new Position('B', 6)));
+           System.out.println("TESTING RIGHT BOAT AT J-6: TRUE EXPECTED " + rightBoat.isHit(new Position('J', 6)));
+           System.out.println("TESTING RIGHT BOAT AT I-5: FALSE EXPECTED " + rightBoat.isHit(new Position('I', 5)));
+           System.out.println("TESTING RIGHT BOAT AT I-6: FALSE EXPECTED " + rightBoat.isHit(new Position('I', 6)));
+           System.out.println("TESTING RIGHT BOAT AT I-7: FALSE EXPECTED " + rightBoat.isHit(new Position('I', 7)));
+           System.out.println("TESTING RIGHT BOAT AT J-5: FALSE EXPECTED " + rightBoat.isHit(new Position('J', 5)));
+           System.out.println("TESTING RIGHT BOAT AT J-7: FALSE EXPECTED " + rightBoat.isHit(new Position('J', 7)));
+           System.out.println("TESTING CENTRE BOAT AT E-6: FALSE EXPECTED " + centreBoat.isHit(new Position('J', 5)));
+           System.out.println("TESTING CENTRE BOAT AT D-5: TRUE EXPECTED " + centreBoat.isHit(new Position('J', 5)));
+           System.out.println("TESTING CENTRE BOAT AT D-6: FALSE EXPECTED " + centreBoat.isHit(new Position('J', 5)));
+           System.out.println("TESTING CENTRE BOAT AT D-7: FALSE EXPECTED " + centreBoat.isHit(new Position('J', 5)));
+           System.out.println("TESTING CENTRE BOAT AT E-5: FALSE EXPECTED " + centreBoat.isHit(new Position('J', 5)));
+           System.out.println("TESTING CENTRE BOAT AT E-7: FALSE EXPECTED " + centreBoat.isHit(new Position('J', 5)));
+           System.out.println("TESTING CENTRE BOAT AT F-5: FALSE EXPECTED " + centreBoat.isHit(new Position('J', 5)));
+           System.out.println("TESTING CENTRE BOAT AT F-6: FALSE EXPECTED " + centreBoat.isHit(new Position('J', 5)));
+           System.out.println("TESTING CENTRE BOAT AT F-7: FALSE EXPECTED " + centreBoat.isHit(new Position('J', 5)));
+           
+       }
+       
+       public static void testSunk()
+       {
+           System.out.println("TESTING sunk()");
+           battleship.hit(new Position(3, 5));
+           cruiser.hit(new Position(4, 6));
+           submarine.hit(new Position(9, 1));
+           submarine.hit(new Position(9, 2));
+           destroyer.hit(new Position(8, 7));
+           destroyer.hit(new Position(8, 8));
+           System.out.println("TESTING AIRCRAFT CARRIER: FALSE EXPECTED " + aircraftCarrier.sunk());
+           System.out.println("TESTING BATTLESHIP: FALSE EXPECTED " + battleship.sunk());
+           System.out.println("TESTING CRUISER: FALSE EXPECTED " + cruiser.sunk());
+           System.out.println("TESTING SUBMARINE: FALSE EXPECTED " + submarine.sunk());
+           System.out.println("TESTING DESTROYER: TRUE EXPECTED " + destroyer.sunk());
+           
+       }
 }
