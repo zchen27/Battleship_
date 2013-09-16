@@ -120,15 +120,24 @@ public class Boat
     
     public boolean isHit(Position test)
     {
-        int i = indexOf(test);
-        return hits[i];
+        
+	int i = indexOf(test);
+        if(i >= 0)
+	{
+	    return hits[i];
+	}
+	else
+	{
+	    return false;
+	}
+	
     }
     
     private int indexOf(Position test)
     {
         for(int i = 0; i < positions.length; i++)   
         {
-			if(positions[i].rowIndex() == test.rowIndex() && positions[i].columnIndex() == test.columnIndex())
+	    if(positions[i].rowIndex() == test.rowIndex() && positions[i].columnIndex() == test.columnIndex())
             {
                 return i;
             }
@@ -140,11 +149,11 @@ public class Boat
     {
         for(int i = 0; i < positions.length; i++)
         {
-            if(!hits[i])
+            if(hits[i] == false)
             {
-                return true;
+                return false;
             }
         }
-        return false;
+        return true;
     }
 }

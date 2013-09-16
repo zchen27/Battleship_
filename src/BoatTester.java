@@ -25,6 +25,7 @@ public class BoatTester
 		testPosition();
 		testOnBoat();
                 testHit();
+		testSunk();
     }
 	
 	public static void testBoat()
