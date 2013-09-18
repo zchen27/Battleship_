@@ -68,22 +68,22 @@ public class Boat
 		return type;
 	}
 	
-    public char abbreviation()
+	public char abbreviation()
 	{
 		type = type.toUpperCase();
         char[] typeArray = type.toCharArray();
 		return typeArray[0];
 	}
     
-    public String direction()
+	public String direction()
     {
-        return direction;
+		return direction;
     }
     
-    public int size()
-    {
-        return positions.length;
-    }
+	public int size()
+	{
+		return positions.length;
+	}
 	
 	public Position position()
 	{
@@ -92,61 +92,60 @@ public class Boat
 	
 	public boolean onBoat(Position test)
 	{
-        if(indexOf(test) != -1)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+		if(indexOf(test) != -1)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
 	}
     
-    public void hit(Position test)
-    {
-       int i = indexOf(test);
-       if(i > -1 && i < positions.length)
-       {
-           hits[i] = true;
-       }
-    }
+	public void hit(Position test)
+	{
+		int i = indexOf(test);
+		if(i > -1 && i < positions.length)
+		{
+			hits[i] = true;
+		}
+	}
     
     public boolean isHit(Position test)
     {
         
-	int i = indexOf(test);
-        if(i >= 0)
-	{
-	    return hits[i];
-	}
-	else
-	{
-	    return false;
-	}
-	
+		int i = indexOf(test);
+		if(i >= 0)
+		{
+			return hits[i];
+		}
+		else
+		{
+			return false;
+		}
     }
     
-    private int indexOf(Position test)
-    {
-        for(int i = 0; i < positions.length; i++)   
-        {
-	    if(positions[i].rowIndex() == test.rowIndex() && positions[i].columnIndex() == test.columnIndex())
-        {
-                return i;
-        }
-        }
-        return -1;
-    }
+	private int indexOf(Position test)
+	{
+		for(int i = 0; i < positions.length; i++)   
+		{
+			if(positions[i].rowIndex() == test.rowIndex() && positions[i].columnIndex() == test.columnIndex())
+			{
+				return i;
+			}
+		}
+		return -1;
+	}
     
-    public boolean sunk()
-    {
-        for(int i = 0; i < positions.length; i++)
-        {
-            if(hits[i] == false)
-            {
-                return false;
-            }
-        }
-        return true;
-    }
+	public boolean sunk()
+	{
+		for(int i = 0; i < positions.length; i++)
+		{
+			if(hits[i] == false)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 }
