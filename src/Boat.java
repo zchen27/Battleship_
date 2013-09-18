@@ -61,16 +61,9 @@ public class Boat
 			}
 		}
 		
-		//PULSECHECK
-		System.out.println(direction + " " + type + " STARTING AT " + positions[0]);
-		for(int i = 0; i < length; i++)
-		{
-            System.out.print(positions[i] + " ");
-		}
-		System.out.println("");
-		//\PulseCheck
 	}
-	    public String name()
+	
+	public String name()
 	{
 		return type;
 	}
@@ -138,9 +131,9 @@ public class Boat
         for(int i = 0; i < positions.length; i++)   
         {
 	    if(positions[i].rowIndex() == test.rowIndex() && positions[i].columnIndex() == test.columnIndex())
-            {
+        {
                 return i;
-            }
+        }
         }
         return -1;
     }
