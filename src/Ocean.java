@@ -14,6 +14,8 @@ public class Ocean
 				{
 					throw new Exception("OUT OF BOUNDS!");
 				}
+				
+				
 			}
 		}
 	}
@@ -45,6 +47,12 @@ public class Ocean
 				break;
 		}
 		return true;
+	}
+	
+	private boolean checkOverlap(String boatname, String direction, Position pos)
+	{
+		Position[] 
+		return false;
 	}
 	
 	private int convertLength(String boatname)
