@@ -15,7 +15,15 @@ public class Ocean
 					throw new Exception("OUT OF BOUNDS!");
 				}
 				
+				if(searchOverlap(boatName, direction, pos))
+				{
+					throw new Exception("OVERLAP!");
+				}
 				
+			}
+			else
+			{
+				throw new Exception("MORE THAN 5 BOATS");
 			}
 		}
 	}
@@ -49,9 +57,38 @@ public class Ocean
 		return true;
 	}
 	
-	private boolean checkOverlap(String boatname, String direction, Position pos)
+	private boolean searchOverlap(String boatname, String direction, Position pos)
 	{
-		Position[] 
+		int length = convertLength(boatname);
+		int col = pos.columnIndex();
+		int row = pos.rowIndex();
+		for(int i = 0; i < length; i++)
+		{
+			checkOverlap(new Position(col, row));
+			switch(direction)
+			{	
+				case "HORIZONTAL":
+					col++;
+					break;
+				case "VERTICAL":
+					row++;
+					break;		
+			}
+		}
+		return false;
+	}
+	
+	private boolean checkOverlap(Position pos)
+	{
+		int col = pos.columnIndex();
+		int row = pos.rowIndex();
+		for(int i = 0; i < positions.length; i++)
+		{
+			if(col == positions[i].columnIndex() && row == positions[i].rowIndex())
+			{
+				return true;
+			}
+		}
 		return false;
 	}
 	
@@ -71,6 +108,17 @@ public class Ocean
 				return 2;
 			default:
 				return -1;
+		}
+	}
+	
+	public void shootAt(Position pos)
+	{
+		for (int i = 0; i < boats.length; i++)
+		{
+			if(boats[i].onBoat(pos))
+			{
+			}
+			}
 		}
 	}
 }
