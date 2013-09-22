@@ -2,7 +2,6 @@
 public class Ocean
 {
 	private Boat[] boats = new Boat[5];
-	private Position[] positions = new Position[17];
 	
 	public void placeBoat(String boatName, String direction, Position pos) throws Exception
 	{
@@ -20,6 +19,7 @@ public class Ocean
 					throw new Exception("OVERLAP!");
 				}
 				
+				boats[i] = new Boat(boatName, pos, direction);			
 			}
 			else
 			{
@@ -82,12 +82,12 @@ public class Ocean
 	{
 		int col = pos.columnIndex();
 		int row = pos.rowIndex();
-		for(int i = 0; i < positions.length; i++)
+		for(int i = 0; i < boats.length; i++)
 		{
-			if(col == positions[i].columnIndex() && row == positions[i].rowIndex())
-			{
-				return true;
-			}
+		    if(boats[i].onBoat(pos))
+		    {
+			return true;
+		    }
 		}
 		return false;
 	}
@@ -117,8 +117,44 @@ public class Ocean
 		{
 			if(boats[i].onBoat(pos))
 			{
-			}
+			    boats[i].hit(pos);
 			}
 		}
+	}
+	
+	public boolean hit(Position pos)
+	{
+	    for(int i = 0; i < boats.length; i++)
+	    {
+		if(boats[i].isHit(pos))
+		{
+		    return true;
+		}
+	    }
+	    return false;
+	}
+	
+	public boolean sunk(Position pos)
+	{
+	    for (int i = 0; i < boats.length; i++)
+	    {
+		if(boats[i].onBoat(pos) && boats[i].sunk())
+		{
+		    return true;
+		}
+	    }
+	    return false;
+	}
+	
+	public boolean allSunk()
+	{
+	    for(int i = 0; i < boats.length; i++)
+	    {
+		if(!boats[i].sunk())
+		{
+		    return false;
+		}
+	    }
+	    return true;
 	}
 }
