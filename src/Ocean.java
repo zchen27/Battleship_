@@ -157,4 +157,28 @@ public class Ocean
 	    }
 	    return true;
 	}
+	
+	public String boatName(Position pos)
+	{
+	    for (int i = 0; i < boats.length; i++)
+	    {
+		if(boats[i].onBoat(pos))
+		{
+		    return boats[i].name();
+		}
+	    }
+	    return null;
+	}
+	
+	public char boatInitial(Position pos)
+	{
+	    for(int i = 0; i < boats.length; i++)
+	    {
+		if(boats[i].onBoat(pos))
+		{
+		    return boats[i].abbreviation();
+		}
+	    }
+	    return '\u0000';
+	}
 }
