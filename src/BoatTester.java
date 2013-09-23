@@ -33,9 +33,9 @@ public class BoatTester
 		System.out.println("TESTING Boat(), NO EXCEPTIONS SHOULD OCCUR");
 		System.out.println("TESTINING 'Aircraft Carrier'");
 		aircraftCarrier = new Boat("Aircraft Carrier", new Position(0, 2), "vertical");
-        System.out.println("TESTING 'Battleship'");
+		System.out.println("TESTING 'Battleship'");
 		battleship = new Boat("Battleship", new Position(3, 5), "horizontal");
-        System.out.println("TESTING 'Cruiser'");
+		System.out.println("TESTING 'Cruiser'");
 		cruiser = new Boat("Cruiser", new Position(4, 6), "horizontal");
         System.out.println("TESING 'Submarine'");
 		submarine = new Boat("Submarine", new Position(9, 1), "vertical");
