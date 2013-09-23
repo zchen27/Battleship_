@@ -212,7 +212,7 @@ public class BoatTester
 		submarine.hit(new Position(9, 1));
 		submarine.hit(new Position(9, 2));
 		destroyer.hit(new Position(8, 7));
-		destroyer.hit(new Position(8, 8));
+		destroyer.hit(new Position(9, 7));
 		System.out.println("TESTING AIRCRAFT CARRIER (clean): FALSE EXPECTED " + aircraftCarrier.sunk());
 		System.out.println("TESTING BATTLESHIP (damaged): FALSE EXPECTED " + battleship.sunk());
 		System.out.println("TESTING CRUISER (damaged): FALSE EXPECTED " + cruiser.sunk());

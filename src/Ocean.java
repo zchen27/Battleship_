@@ -86,7 +86,7 @@ public class Ocean
 		{
 		    if(boats[i].onBoat(pos))
 		    {
-			return true;
+				return true;
 		    }
 		}
 		return false;
@@ -126,10 +126,10 @@ public class Ocean
 	{
 	    for(int i = 0; i < boats.length; i++)
 	    {
-		if(boats[i].isHit(pos))
-		{
-		    return true;
-		}
+			if(boats[i].isHit(pos))
+			{
+				return true;
+			}
 	    }
 	    return false;
 	}
@@ -138,10 +138,10 @@ public class Ocean
 	{
 	    for (int i = 0; i < boats.length; i++)
 	    {
-		if(boats[i].onBoat(pos) && boats[i].sunk())
-		{
-		    return true;
-		}
+			if(boats[i].onBoat(pos) && boats[i].sunk())
+			{
+				return true;
+			}
 	    }
 	    return false;
 	}
@@ -150,10 +150,10 @@ public class Ocean
 	{
 	    for(int i = 0; i < boats.length; i++)
 	    {
-		if(!boats[i].sunk())
-		{
-		    return false;
-		}
+			if(!boats[i].sunk())
+			{
+				return false;
+			}
 	    }
 	    return true;
 	}
