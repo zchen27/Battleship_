@@ -5,27 +5,22 @@ public class Ocean
 	
 	public void placeBoat(String boatName, String direction, Position pos) throws Exception
 	{
-		for(int i = 0; i < boats.length; i++)
+		int i = 0;
+		while (boats[i] != null)
 		{
-			if (boats[i] != null)
-			{
-				if(!checkInGrid(boatName, direction, pos))
-				{
-					throw new Exception("OUT OF BOUNDS!");
-				}
-				
-				if(searchOverlap(boatName, direction, pos))
-				{
-					throw new Exception("OVERLAP!");
-				}
-				
-				boats[i] = new Boat(boatName, pos, direction);			
-			}
-			else
-			{
-				throw new Exception("MORE THAN 5 BOATS");
-			}
+			System.out.println(boats[i]); 
+			i++;
 		}
+		if(!checkInGrid(boatName, direction, pos))
+		{
+			throw new Exception("NOT TOTALLY IN GRID");
+		}
+		if(searchOverlap(boatName, direction, pos))
+		{
+			throw new Exception("OVERLAPPING ONE OR MORE BOATS");
+		}
+		
+		boats[i] = new Boat(boatName, pos, direction);
 	}
 	
 	private boolean checkInGrid(String boatname, String direction, Position pos)
@@ -64,7 +59,10 @@ public class Ocean
 		int row = pos.rowIndex();
 		for(int i = 0; i < length; i++)
 		{
-			checkOverlap(new Position(col, row));
+			if (checkOverlap(new Position(col, row)))
+			{
+				return true;
+			}
 			switch(direction)
 			{	
 				case "HORIZONTAL":
@@ -80,14 +78,12 @@ public class Ocean
 	
 	private boolean checkOverlap(Position pos)
 	{
-		int col = pos.columnIndex();
-		int row = pos.rowIndex();
 		for(int i = 0; i < boats.length; i++)
 		{
-		    if(boats[i].onBoat(pos))
-		    {
+			if(boats[i].onBoat(pos))
+			{
 				return true;
-		    }
+			}
 		}
 		return false;
 	}
@@ -162,10 +158,10 @@ public class Ocean
 	{
 	    for (int i = 0; i < boats.length; i++)
 	    {
-		if(boats[i].onBoat(pos))
-		{
-		    return boats[i].name();
-		}
+			if(boats[i].onBoat(pos))
+			{
+				return boats[i].name();
+			}
 	    }
 	    return null;
 	}
@@ -174,10 +170,10 @@ public class Ocean
 	{
 	    for(int i = 0; i < boats.length; i++)
 	    {
-		if(boats[i].onBoat(pos))
-		{
-		    return boats[i].abbreviation();
-		}
+			if(boats[i].onBoat(pos))
+			{
+				return boats[i].abbreviation();
+			}
 	    }
 	    return '\u0000';
 	}
