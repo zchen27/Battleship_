@@ -2,88 +2,70 @@
 public class Ocean
 {
 	private Boat[] boats = new Boat[5];
-	private Position[] occupied = new Position[17];
-	private Position[] hit = new Position[100];
-	private int placedBoats = 0;
-	private int filledPositions = 0;
+	private char[][] grid = new char[10][10];
+	private int currentBoats = 0;
 	
 	public Ocean()
 	{
-
+	    for(int i = 0; i < 10; i++)
+	    {
+		for(int j = 0; j < 10; j++)
+		{
+		    grid[i][j] = '.';
+		}
+	    }
 	}
 	
-	public void placeBoat(String boatName, String direction, Position pos) throws Exception
+	public void placeBoat(String boatname, String direction, Position pos) throws Exception
 	{
-		if(!checkInGrid(boatName, direction, pos))
-		{
-			throw new Exception("NOT TOTALLY IN GRID");
-		}
-		if(!searchCleared(boatName, direction, pos))
-		{
-			throw new Exception("OVERLAPPING ONE OR MORE BOATS");
-		}
-		try
-		{
-			dropBoat(boatName, direction, pos);
-		}
-		catch (Exception e)
-		{
-			throw new Exception("MORE THAN FIVE BOATS");
-		}
-	}
-	
-	private void dropBoat(String boatName, String direction, Position pos)
-	{
-		Boat boat = new Boat(boatName, pos, direction);
-		char abrv = boat.abbreviation();
-		int col = pos.columnIndex();
-		int row = pos.rowIndex();
-		
-		boats[placedBoats] = boat;
-		placedBoats++;
-		for(int i = 0; i < boat.size(); i++)
-		{
-			switch(direction)
+	    int col = pos.columnIndex();
+	    int row = pos.rowIndex();
+	    String dir = direction.toUpperCase();
+	    Boat temp = new Boat(boatname, pos, direction);
+	    if(col < 0 || row < 0 || col > 9 || row > 9)
+	    {
+		throw new Exception("NOT IN GRID");
+	    }
+	    switch(direction)
+	    {
+		case "HORIZONTAL":
+		    if(col + temp.size() > 9)
+		    {
+			throw new Exception("NOT IN GRID");
+		    }
+		    for(int i = 0; i < temp.size(); i++)
+		    {
+			if(grid[col + i][row] != '.')
 			{
-				case "HORIZONTAL":
-					occupied[filledPositions] = new Position(col + i, row);
-				case "VERTICAL":
-					occupied[filledPositions] = new Position(col, row + i);
+			    throw new Exception("OCCUPIED");
 			}
-			filledPositions++;
-		}
-	}
-	
-	private boolean checkInGrid(String boatName, String direction, Position pos)
-	{
-		int col = pos.columnIndex();
-		int row = pos.rowIndex();
-		int size = new Boat(boatName, pos, direction).size();
-		if(col < 0 || row < 0 || col + size > 9 || row + size > 9)
+			grid[col + i][row] = temp.abbreviation();
+		    }
+		    break;
+		case "VERTICAL":
 		{
-			return false;
-		}
-		
-		return true;
-	}
-	
-	private boolean searchCleared(String boatName, String direction, Position pos)
-	{
-		Boat tempBoat = new Boat(boatName, pos, direction);
-		for(int i = 0; i <= filledPositions; i++)
-		{
-			if(tempBoat.onBoat(occupied[i]))
+		    if(row + temp.size() > 9)
+		    {
+			throw new Exception("NOT IN GRID");
+		    }
+		    for(int i = 0; i < temp.size(); i++)
+		    {
+			if(grid[col][row + i] != '.')
 			{
-				return false;
-			}	
+			    throw new Exception("OCCUPIED");
+			}
+			grid[col][row + i] = temp.abbreviation();
+		    }
+		    break;
 		}
-		return true;
+	    }
+	    boats[currentBoats] = temp;
+	    currentBoats++;
 	}
 	
-	public void shootAt(Position pos)
+	public void shootAt()
 	{
-		int col = pos.columnIndex();
-		int row = pos.rowIndex();
-		
+	    
 	}
+
 }
