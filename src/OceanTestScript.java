@@ -52,7 +52,7 @@ public class OceanTestScript {
     }
 
     public static void testInformationMethods() {
-        Ocean  ocean = new Ocean ();
+        GoodOcean  ocean = new GoodOcean ();
         final String h = "horizontal";
         final String v = "vertical";
 
@@ -135,8 +135,8 @@ public class OceanTestScript {
     }
 
     public static void testPlaceBoat() throws NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        Method placeBoat = Ocean .class.getMethod("placeBoat", String.class, String.class, Position.class);
-        Ocean  oc = new Ocean ();
+        Method placeBoat = GoodOcean .class.getMethod("placeBoat", String.class, String.class, Position.class);
+        GoodOcean  oc = new GoodOcean ();
         testExc("[A.1] Place horizontal boat off right edge", oc, placeBoat,
                 "Destroyer", "horizontal", new Position(0, 10));
         testExc("[A.2] Place horizontal boat off right edge", oc, placeBoat,
@@ -153,16 +153,16 @@ public class OceanTestScript {
                 "Battleship", "horizontal", new Position(9, 0));
         testNoExc("[A.5] Place horizontal battleship in the bottom right", oc, placeBoat,
                 "Battleship", "horizontal", new Position(9, 4));
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         testNoExc("[A.5] Place horizontal cruiser in the bottom right", oc, placeBoat,
                 "Cruiser", "horizontal", new Position(9, 7));
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         testNoExc("[A.5] Place horizontal submarine in the bottom right", oc, placeBoat,
                 "Submarine", "horizontal", new Position(9, 7));
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         testNoExc("[A.5] Place horizontal destroyer in the bottom right", oc, placeBoat,
                 "Destroyer", "horizontal", new Position(9, 8));
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         testExc("[A.6] Place horizontal destroyer above top row", oc, placeBoat,
                 "Destroyer", "horizontal", new Position(-1, 3));
         testExc("[A.7] Place horizontal destroyer above top row", oc, placeBoat,
@@ -179,7 +179,7 @@ public class OceanTestScript {
                 "Aircraft Carrier", "horizontal", new Position(4, 1));
         testNoExc("[A.8e] Place horizontal aircraft carrier near center", oc, placeBoat,
                 "Aircraft Carrier", "horizontal", new Position(5, 1));
-        oc = new Ocean (); // I hit the 5-boat limit here
+        oc = new GoodOcean (); // I hit the 5-boat limit here
         testNoExc("[A.8f] Place horizontal aircraft carrier near center", oc, placeBoat,
                 "Aircraft Carrier", "horizontal", new Position(6, 1));
         testNoExc("[A.8g] Place horizontal aircraft carrier near center", oc, placeBoat,
@@ -188,7 +188,7 @@ public class OceanTestScript {
                 "Aircraft Carrier", "horizontal", new Position(8, 1));
         testNoExc("[A.8i] Place horizontal aircraft carrier near center", oc, placeBoat,
                 "Aircraft Carrier", "horizontal", new Position(9, 1));
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         testNoExc("[A.8j] Place horizontal aircraft carrier near center", oc, placeBoat,
                 "Aircraft Carrier", "horizontal", new Position(1, 5));
         testNoExc("[A.8k] Place horizontal aircraft carrier near center", oc, placeBoat,
@@ -199,7 +199,7 @@ public class OceanTestScript {
                 "Aircraft Carrier", "horizontal", new Position(4, 5));
         testNoExc("[A.8n] Place horizontal aircraft carrier near center", oc, placeBoat,
                 "Aircraft Carrier", "horizontal", new Position(5, 5));
-        oc = new Ocean (); // I hit the 5-boat limit here
+        oc = new GoodOcean (); // I hit the 5-boat limit here
         testNoExc("[A.8o] Place horizontal aircraft carrier near center", oc, placeBoat,
                 "Aircraft Carrier", "horizontal", new Position(6, 5));
         testNoExc("[A.8p] Place horizontal aircraft carrier near center", oc, placeBoat,
@@ -226,14 +226,14 @@ public class OceanTestScript {
         testExc("[A.14] Place vertical battleship very partly off bottom edge", oc, placeBoat,
                 "Battleship", "vertical", new Position(7, 0));
         // Start A.15
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         testNoExc("[A.15] Place vertical battleship in top right", oc, placeBoat,
                 "Battleship", "vertical", new Position(0, 9));
         testNoExc("[A.15] Place vertical cruiser in bottom right", oc, placeBoat,
                 "Cruiser", "vertical", new Position(6, 9));
         // End A.15
         // Start A.16
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         testNoExc("[A.16] Place vertical sub in top right", oc, placeBoat,
                 "Submarine", "vertical", new Position(0, 0));
         testNoExc("[A.16] Place vertical cruiser in bottom right", oc, placeBoat,
@@ -248,7 +248,7 @@ public class OceanTestScript {
         testExc("[A.18] Place vertical destroyer over left edge", oc, placeBoat,
                 "Destroyer", "vertical", new Position(1, -1));
         // Begin A.19
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         System.out.println("[HINT]\tIf you get an exception here, it might be because the ocean can't handle 5 boats");
         testNoExc("[A.19a] Place vertical aircraft carrier near center", oc, placeBoat,
                 "Aircraft Carrier", "vertical", new Position(2, 1));
@@ -260,7 +260,7 @@ public class OceanTestScript {
                 "Aircraft Carrier", "vertical", new Position(2, 4));
         testNoExc("[A.19e] Place vertical aircraft carrier near center", oc, placeBoat,
                 "Aircraft Carrier", "vertical", new Position(2, 5));
-        oc = new Ocean (); // I hit the 5-boat limit here
+        oc = new GoodOcean (); // I hit the 5-boat limit here
         testNoExc("[A.19f] Place vertical aircraft carrier near center", oc, placeBoat,
                 "Aircraft Carrier", "vertical", new Position(2, 6));
         testNoExc("[A.19g] Place vertical aircraft carrier near center", oc, placeBoat,
@@ -278,7 +278,7 @@ public class OceanTestScript {
                 "Cruiser", "vertical", new Position(-2, 4));
         testExc("[A.22] Place vertical destroyer a little bit over top edge", oc, placeBoat,
                 "Cruiser", "vertical", new Position(-1, 6));
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         testNoExc("[A.23] (Setup) Place normal horizontal battleship", oc, placeBoat,
                 "Battleship", "horizontal", new Position(3, 3));
         testExc("[A.23] Place an overlapping horizontal cruiser", oc, placeBoat,
@@ -287,62 +287,62 @@ public class OceanTestScript {
                 "Submarine", "horizontal", new Position(4, 3));
         testNoExc("[A.23b] Place a non-overlapping horizontal destroyer", oc, placeBoat,
                 "Destroyer", "horizontal", new Position(4, 1));
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         testNoExc("[A.24] (Setup) Place normal horizontal battleship", oc, placeBoat,
                 "Battleship", "horizontal", new Position(3, 3));
         testExc("[A.24] Place an overlapping horizontal cruiser at battleship's start position", oc, placeBoat,
                 "Cruiser", "horizontal", new Position(3, 3));
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         testNoExc("[A.25] (Setup) Place normal horizontal battleship", oc, placeBoat,
                 "Battleship", "horizontal", new Position(3, 0));
         testNoExc("[A.25] Place an overlapping horizontal cruiser at battleship's start position", oc, placeBoat,
                 "Cruiser", "horizontal", new Position(3, 4));
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         testNoExc("[A.26] (Setup) Place normal horizontal battleship", oc, placeBoat,
                 "Battleship", "horizontal", new Position(3, 4));
         testNoExc("[A.26] Place an non-overlapping horizontal cruiser to the left of the battleship", oc, placeBoat,
                 "Cruiser", "horizontal", new Position(3, 1));
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         testNoExc("[A.27] (Setup) Place normal horizontal battleship", oc, placeBoat,
                 "Battleship", "horizontal", new Position(3, 3));
         testNoExc("[A.27] Place a horizontal cruiser one row above battleship's start position", oc, placeBoat,
                 "Cruiser", "horizontal", new Position(2, 3));
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         testNoExc("[A.28] (Setup) Place normal horizontal battleship", oc, placeBoat,
                 "Battleship", "horizontal", new Position(3, 3));
         testNoExc("[A.28] Place a horizontal cruiser one row below battleship's start position", oc, placeBoat,
                 "Cruiser", "horizontal", new Position(4, 3));
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         testNoExc("[A.28] (Setup) Place normal vertical battleship", oc, placeBoat,
                 "Battleship", "vertical", new Position(0, 4));
         testNoExc("[A.28] Place a horizontal cruiser one row below battleship's start position", oc, placeBoat,
                 "Cruiser", "horizontal", new Position(4, 3));
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         testNoExc("[A.29] (Setup) Place normal vertical battleship", oc, placeBoat,
                 "Battleship", "vertical", new Position(1, 3));
         testNoExc("[A.29] Place a horizontal cruiser one row above battleship's start position", oc, placeBoat,
                 "Cruiser", "horizontal", new Position(0, 3));
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         testNoExc("[A.30] (Setup) Place normal vertical battleship", oc, placeBoat,
                 "Battleship", "vertical", new Position(0, 3));
         testNoExc("[A.30] Place a horizontal cruiser one row below battleship's position", oc, placeBoat,
                 "Cruiser", "horizontal", new Position(4, 3));
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         testNoExc("[A.43] (Setup) Place normal horizontal battleship", oc, placeBoat,
                 "Battleship", "horizontal", new Position(3, 0));
         testExc("[A.43] Place an overlapping vertical destroyer at cruiser's end position", oc, placeBoat,
                 "Destroyer", "vertical", new Position(2, 0));
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         testNoExc("[A.42] (Setup) Place normal horizontal battleship", oc, placeBoat,
                 "Battleship", "horizontal", new Position(3, 0));
         testExc("[A.42] Place an overlapping vertical destroyer at desroyer's start position", oc, placeBoat,
                 "Destroyer", "vertical", new Position(3, 0));
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         testNoExc("[A.41] (Setup) Place normal horizontal battleship", oc, placeBoat,
                 "Battleship", "horizontal", new Position(3, 0));
         testNoExc("[A.41] Place a non-overlapping vertical destroyer to the right of the battleship", oc, placeBoat,
                 "Destroyer", "vertical", new Position(3, 4));
-        oc = new Ocean ();
+        oc = new GoodOcean ();
         testNoExc("[A.40] (Setup) Place normal horizontal battleship", oc, placeBoat,
                 "Battleship", "horizontal", new Position(3, 1));
         testNoExc("[A.40] Place a non-overlapping vertical destroyer to the left of the battleship", oc, placeBoat,
@@ -351,7 +351,7 @@ public class OceanTestScript {
     }
 
     public static void testHitSunk() {
-        Ocean  ocean = new Ocean ();
+        GoodOcean  ocean = new GoodOcean ();
         try {
 
             ocean.placeBoat("Aircraft Carrier", "horizontal", new Position('D', 5));
@@ -494,7 +494,8 @@ public class OceanTestScript {
     	
     	//ALL SUNK
     	System.out.println("HITTING LOCATIONS D-5 E-5 F-5 G-5 H-5 EVERYTHING IS SUNK");
-    	ocean.shootAt(new Position('E', 5));
+    	ocean.shootAt(new Position('D', 5));
+		ocean.shootAt(new Position('E', 5));
     	ocean.shootAt(new Position('F', 5));
     	ocean.shootAt(new Position('G', 5));
     	ocean.shootAt(new Position('H', 5));
