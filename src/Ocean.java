@@ -63,9 +63,73 @@ public class Ocean
 	    currentBoats++;
 	}
 	
-	public void shootAt()
+	public void shootAt(Position pos)
 	{
-	    
+	    for(int i = 0; i < boats.length; i++)
+	    {
+		if(boats[i].onBoat(pos))
+		{
+		    boats[i].hit(pos);
+		}
+	    }
 	}
-
+	
+	public boolean hit(Position pos)
+	{
+	    for(int i = 0; i < boats.length; i++)
+	    {
+		if(boats[i].isHit(pos))
+		{
+		    return true;
+		}
+	    }
+	    return false;
+	}
+	
+	public boolean sunk(Position pos)
+	{
+	    for(int i = 0; i < boats.length; i++)
+	    {
+		if(boats[i].onBoat(pos) && boats[i].sunk())
+		{
+		    return true;
+		}
+	    }
+	    return false;  
+	}
+	
+	public boolean allSunk()
+	{
+	    for(int i = 0; i < boats.length; i++)
+	    {
+		if(!boats[i].sunk())
+		{
+		    return false;
+		}
+	    }
+	    return true;
+	}
+	
+	public char boatInitial(Position pos)
+	{
+	    int col = pos.columnIndex();
+	    int row = pos.rowIndex();
+	    if(grid[col][row] != '.')
+	    {
+		return grid[col][row];
+	    }
+	    return '\u0000';
+	}
+	
+	public String boatName(Position pos)
+	{
+	    for(int i = 0; i < boats.length; i++)
+	    {
+		if(boats[i].onBoat(pos))
+		{
+		    return boats[i].name();
+		}
+	    }
+	    return ""; 
+	}
 }
