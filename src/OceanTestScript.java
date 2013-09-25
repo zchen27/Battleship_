@@ -11,7 +11,7 @@ public class OceanTestScript {
         if (received.equals(expected)) {
             System.out.println("OK:\t" + name + " returned " + received);
         } else {
-            System.err.println("FAIL:\t" + name + " returned " + received + ",\texpected " + expected);
+            System.out.println("FAIL:\t" + name + " returned " + received + ",\texpected " + expected);
         }
     }
 
@@ -22,13 +22,13 @@ public class OceanTestScript {
     private static void testExc(String name, Object inst, Method tg, Object ... args) {
         try {
             tg.invoke(inst, args);
-            System.err.println("FAIL:\t"+name+" didn't throw exception");
+            System.out.println("FAIL:\t"+name+" didn't throw exception");
             assert(false); // Make it really obvious something happened
         } catch (IllegalAccessException ex) {
-            System.err.println("FAIL:\tError calling method");
+            System.out.println("FAIL:\tError calling method");
             ex.printStackTrace();
         } catch (IllegalArgumentException ex){
-        	System.err.println("FAIL:\tError calling method");
+        	System.out.println("FAIL:\tError calling method");
             ex.printStackTrace();
         } catch (InvocationTargetException ex) {
             System.out.println("OK:\t"+name+" threw exception");
@@ -40,13 +40,13 @@ public class OceanTestScript {
             tg.invoke(inst, args);
             System.out.println("OK:\t"+name+" didn't throw exception");
         } catch (IllegalAccessException ex) {
-            System.err.println("FAIL:\tError calling method");
+            System.out.println("FAIL:\tError calling method");
             ex.printStackTrace();
         } catch (IllegalArgumentException ex){
-        	System.err.println("FAIL:\tError calling method");
+        	System.out.println("FAIL:\tError calling method");
             ex.printStackTrace();
         } catch (InvocationTargetException ex) {
-            System.err.println("FAIL:\t"+name+" threw exception");
+            System.out.println("FAIL:\t"+name+" threw exception");
             assert(false); // Make it really obvious something happened
         }
     }
