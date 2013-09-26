@@ -18,7 +18,7 @@ public class Ocean
 	
 	public void placeBoat(String boatname, String direction, Position pos) throws Exception
 	{
-		int col = pos.columnIndex();
+	    int col = pos.columnIndex();
 	    int row = pos.rowIndex();
 	    String dir = direction.toUpperCase();
 	    Boat temp = new Boat(boatname, pos, direction);
