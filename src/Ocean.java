@@ -1,3 +1,5 @@
+import java.util.*;
+import java.math.*;
 
 public class Ocean
 {
@@ -12,6 +14,21 @@ public class Ocean
 			for(int j = 0; j < 10; j++)
 			{
 				grid[i][j] = '.';
+			}
+		}
+	}
+	
+	
+	public void placeAllBoats()
+	{
+		boolean placed = false;
+		String[] names = {"Aircraft Carrier", "Battleship", "Cruiser", "Submarine", "Destroyer"};
+		
+		while(currentBoats < 5)
+		{
+			try
+			{
+				placeBoat(names[currentBoats])
 			}
 		}
 	}
