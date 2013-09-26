@@ -1,3 +1,4 @@
+
 public class BattleshipGrid
 {
 	private char[][] grid = new char[10][10];
@@ -12,7 +13,7 @@ public class BattleshipGrid
 			}
 		}
 	}
-    
+	
 	public void shotAt(Position pos, boolean hit, char initial)
 	{
 		int col = pos.columnIndex();
@@ -25,8 +26,8 @@ public class BattleshipGrid
 		{
 			grid[col][row] = '*';
 		}
-    }
-    
+	}
+	
 	public boolean hit(Position pos)
 	{
 		int col = pos.columnIndex();
@@ -37,7 +38,7 @@ public class BattleshipGrid
 		}
 		return true;
 	}
-    
+	
 	public boolean miss(Position pos)
 	{
 		int col = pos.columnIndex();
@@ -58,6 +59,6 @@ public class BattleshipGrid
 			return false;
 		}
 		return true;
-    }
-    
+	}
+
 }

@@ -7,29 +7,29 @@ public class Ocean
 	
 	public Ocean()
 	{
-	    for(int i = 0; i < 10; i++)
-	    {
+		for(int i = 0; i < 10; i++)
+		{
 			for(int j = 0; j < 10; j++)
 			{
 				grid[i][j] = '.';
 			}
-	    }
+		}
 	}
 	
 	public void placeBoat(String boatname, String direction, Position pos) throws Exception
 	{
-	    int col = pos.columnIndex();
-	    int row = pos.rowIndex();
-	    String dir = direction.toUpperCase();
-	    Boat temp = new Boat(boatname, pos, direction);
-	    if(currentBoats >= 5)
+		int col = pos.columnIndex();
+		int row = pos.rowIndex();
+		String dir = direction.toUpperCase();
+		Boat temp = new Boat(boatname, pos, direction);
+		if(currentBoats >= 5)
 		{
 			throw new Exception("TOO MANY BOATS");
 		}
 		if(col < 0 || row < 0 || col > 9 || row > 9)
-	    {
+		{
 			throw new Exception("NOT IN GRID");
-	    }
+		}
 		if(direction.equalsIgnoreCase("HORIZONTAL"))
 		{
 			if(col + temp.size() > 9)
@@ -66,77 +66,77 @@ public class Ocean
 				grid[col][row + i] = temp.abbreviation();
 			}
 		}
-	    boats[currentBoats] = temp;
-	    currentBoats++;
+		boats[currentBoats] = temp;
+		currentBoats++;
 	}
 	
 	public void shootAt(Position pos)
 	{
-	    for(int i = 0; i < currentBoats; i++)
-	    {
+		for(int i = 0; i < currentBoats; i++)
+		{
 			if(boats[i].onBoat(pos))
 			{
 				boats[i].hit(pos);
 			}
-	    }
+		}
 	}
 	
 	public boolean hit(Position pos)
 	{
-	    for(int i = 0; i < currentBoats; i++)
+		for(int i = 0; i < currentBoats; i++)
 		{
 			if(boats[i].isHit(pos))
 			{
 				return true;
 			}
-	    }
-	    return false;
+		}
+		return false;
 	}
 	
 	public boolean sunk(Position pos)
 	{
-	    for(int i = 0; i < currentBoats; i++)
-	    {
+		for(int i = 0; i < currentBoats; i++)
+		{
 			if(boats[i].onBoat(pos) && boats[i].sunk())
 			{
 				return true;
 			}
-	    }
-	    return false;  
+		}
+		return false;
 	}
 	
 	public boolean allSunk()
 	{
-	    for(int i = 0; i < currentBoats; i++)
-	    {
+		for(int i = 0; i < currentBoats; i++)
+		{
 			if(!boats[i].sunk())
 			{
 				return false;
 			}
-	    }
-	    return true;
+		}
+		return true;
 	}
 	
 	public char boatInitial(Position pos)
 	{
-	    int col = pos.columnIndex();
-	    int row = pos.rowIndex();
-	    if(grid[col][row] != '.')
-	    {
+		int col = pos.columnIndex();
+		int row = pos.rowIndex();
+		if(grid[col][row] != '.')
+		{
 			return grid[col][row];
-	    }
-	    return '\u0000';
+		}
+		return '\u0000';
 	}
 	
 	public String boatName(Position pos)
 	{
-	    for(int i = 0; i < currentBoats; i++)
-	    {
+		for(int i = 0; i < currentBoats; i++)
+		{
 			if(boats[i].onBoat(pos))
 			{
 				return boats[i].name();
 			}
-	    }
-	    return ""; 
+		}
+		return ""; 
 	}
 }
