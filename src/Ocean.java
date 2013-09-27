@@ -48,10 +48,12 @@ public class Ocean
 			
 			try
 			{
+				System.out.println(names[currentBoats] + " " + direction + " " + new Position(col,row));
 				placeBoat(names[currentBoats], direction, new Position(col, row));
 			}
 			catch (Exception e)
 			{
+				System.out.println(e);
 				placeAllBoats();
 			}
 		}
@@ -61,7 +63,6 @@ public class Ocean
 	{
 		int col = pos.columnIndex();
 		int row = pos.rowIndex();
-		String dir = direction.toUpperCase();
 		Boat temp = new Boat(boatname, pos, direction);
 		if(currentBoats >= 5)
 		{

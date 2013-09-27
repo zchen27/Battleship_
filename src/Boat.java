@@ -9,7 +9,6 @@ public class Boat
 	public Boat(String t, Position p, String dir)
 	{
 		type = t;
-		dir = dir.toUpperCase();
 		direction = dir;
 		this.setPositions(p);
 	}
@@ -51,11 +50,11 @@ public class Boat
 
 		for(int i = 1; i < length; i++)
 		{
-			if(this.direction .equals ("HORIZONTAL"))
+			if(this.direction.equalsIgnoreCase("HORIZONTAL"))
 			{
 				positions[i] = new Position(start.columnIndex() + i, start.rowIndex());
 			}    
-			else if(this.direction .equals ("VERTICAL"))
+			else if(this.direction.equalsIgnoreCase("VERTICAL"))
 			{
 				positions[i] = new Position(start.columnIndex(), start.rowIndex() + i);
 			}
