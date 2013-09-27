@@ -74,7 +74,7 @@ public class Ocean
 		}
 		if(direction.equalsIgnoreCase("HORIZONTAL"))
 		{
-			if(col + temp.size() > 9)
+			if(col + temp.size() > 10)
 			{
 				throw new Exception("NOT IN GRID");
 			}
@@ -92,7 +92,7 @@ public class Ocean
 		}
 		else if(direction.equalsIgnoreCase("VERTICAL"))
 		{
-			if(row + temp.size() > 9)
+			if(row + temp.size() > 10)
 			{
 				throw new Exception("NOT IN GRID");
 			}
