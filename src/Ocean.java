@@ -1,5 +1,4 @@
 import java.util.*;
-import java.math.*;
 
 public class Ocean
 {
@@ -21,14 +20,39 @@ public class Ocean
 	
 	public void placeAllBoats()
 	{
-		boolean placed = false;
 		String[] names = {"Aircraft Carrier", "Battleship", "Cruiser", "Submarine", "Destroyer"};
+		String direction;
+		int col;
+		int row;
+		int dir;
+		Random rand = new Random();
 		
 		while(currentBoats < 5)
 		{
+			dir = rand.nextInt(2);
+			col = rand.nextInt(10);
+			row = rand.nextInt(10);
+			
+			switch(dir)
+			{
+				case 0:
+					direction = "HORIZONTAL";
+					break;
+				case 1:
+					direction = "VERTICAL";
+					break;
+				default:
+					direction = "VERTICAL";
+					break;
+			}
+			
 			try
 			{
-				placeBoat(names[currentBoats])
+				placeBoat(names[currentBoats], direction, new Position(col, row));
+			}
+			catch (Exception e)
+			{
+				placeAllBoats();
 			}
 		}
 	}
