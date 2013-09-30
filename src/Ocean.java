@@ -42,7 +42,7 @@ public class Ocean
 					direction = "VERTICAL";
 					break;
 				default:
-					direction = "VERTICAL";
+					direction = null;
 					break;
 			}
 			
