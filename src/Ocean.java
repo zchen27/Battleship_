@@ -42,18 +42,17 @@ public class Ocean
 					direction = "VERTICAL";
 					break;
 				default:
-					direction = null;
+					direction = "VERTICAL";
 					break;
 			}
 			
 			try
 			{
-				System.out.println(names[currentBoats] + " " + direction + " " + new Position(col,row));
+			
 				placeBoat(names[currentBoats], direction, new Position(col, row));
 			}
 			catch (Exception e)
 			{
-				System.out.println(e);
 				placeAllBoats();
 			}
 		}
