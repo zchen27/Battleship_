@@ -1,8 +1,11 @@
 
 public class BattleshipGrid
 {
+	//EMPTY -- '.'
+	//MISS  -- '*'
+	
 	private char[][] grid = new char[10][10];
-
+	
 	public BattleshipGrid()
 	{
 		for (int i = 0; i < grid.length; i++)
@@ -61,4 +64,17 @@ public class BattleshipGrid
 		return true;
 	}
 
+	public char boatInitial(Position pos)
+	{
+		int col = pos.columnIndex();
+		int row = pos.rowIndex();
+		if(hit(pos))
+		{
+			return grid[col][row];
+		}
+		else
+		{
+			return '\u0000';
+		}
+	}
 }
