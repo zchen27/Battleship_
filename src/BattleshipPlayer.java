@@ -102,7 +102,7 @@ public class BattleshipPlayer
 		}
 		if(gameOver)
 		{
-			System.out.println("Fall back, we've had enough for today.");
+			System.out.println("Fall back, we've had enough for today");
 		}
 	}
 	

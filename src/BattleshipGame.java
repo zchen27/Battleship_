@@ -1,12 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author zchen0704
- */
-public class BattleshipGame {
+
+public class BattleshipGame
+{
+	private int turns;
+	private Ocean ocean;
 	
+	public BattleshipGame(BattleshipPlayer player)
+	{
+		turns = 0;
+		ocean = new Ocean();
+		
+	}
 }
