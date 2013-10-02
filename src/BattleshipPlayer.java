@@ -13,7 +13,7 @@ public class BattleshipPlayer
 	public void startGame()
 	{
 		grid = new BattleshipGrid();
-		if(name == null)
+		if (name == null)
 		{
 			insertName();
 		}
@@ -48,7 +48,7 @@ public class BattleshipPlayer
 		Scanner sc = new Scanner(System.in);
 		System.out.println("INSERT COLUMN");
 		col = sc.next().toUpperCase().toCharArray()[0];
-		if((byte)col < (byte)'A' || (byte)col > (byte)'J')
+		if ((byte)col < (byte)'A' || (byte)col > (byte)'J')
 		{
 			System.out.println("INVALID COLUMN");
 			promptCol();
@@ -62,7 +62,7 @@ public class BattleshipPlayer
 		Scanner sc = new Scanner(System.in);
 		System.out.println("INSERT ROW");
 		row = sc.nextInt();
-		if(row < 0 || row > 9)
+		if (row < 0 || row > 9)
 		{
 			System.out.println("INVALID ROW");
 			promptRow();
@@ -82,9 +82,11 @@ public class BattleshipPlayer
 
 	public void updatePlayer(Position pos, boolean hit, char initial, String boatName, boolean sunk, boolean gameOver, boolean tooManyTurns, int turns)
 	{
+		grid = getGrid();
 		updateGrid(pos, hit, initial);
+		
 		System.out.println("Turn " + turns);
-		if(hit)
+		if (hit)
 		{
 			System.out.println(boatName + " was hit!");
 		}
@@ -92,18 +94,44 @@ public class BattleshipPlayer
 		{
 			System.out.println("Someone else take over the gun!");
 		}
-		if(sunk)
+		if (sunk)
 		{
 			System.out.println("Target is knocked out, find another target.");
 		}
-		if(tooManyTurns)
+		if (tooManyTurns)
 		{
 			System.out.println("Ammunition expended!");
 		}
-		if(gameOver)
+		if (gameOver)
 		{
 			System.out.println("Fall back, we've had enough for today");
+		}	
+	}
+	
+	public void printGrid()
+	{
+		System.out.print(" \tABCDEFGHIJ");
+		for (int i = 0; i < 10; i++)
+		{
+			System.out.print((i + 1) + "\t");
+			for (int j = 0; j < 10; j++)
+			{
+				if(grid.empty(new Position(j, i)))
+				{
+					System.out.print(".");
+				}
+				else if (grid.miss(new Position(j, i)))
+				{
+					System.out.print("*");
+				}
+				else
+				{
+					System.out.print(grid.boatInitial(new Position(j, i)));
+				}
+			}
+			System.out.println("");
 		}
+		
 	}
 	
 }
