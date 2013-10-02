@@ -61,7 +61,14 @@ public class BattleshipPlayer
 		int row;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("INSERT ROW");
-		row = sc.nextInt();
+		try
+		{
+			row = sc.nextInt();
+		}
+		catch(Exception e)
+		{
+			promptRow();
+		}
 		if (row < 1 || row > 10)
 		{
 			System.out.println("INVALID ROW");
@@ -110,10 +117,10 @@ public class BattleshipPlayer
 	
 	public void printGrid()
 	{
-		System.out.println(" \tABCDEFGHIJ");
+		System.out.println(" \t|A|B|C|D|E|F|G|H|I|J|");
 		for (int i = 0; i < 10; i++)
 		{
-			System.out.print((i + 1) + "\t");
+			System.out.print((i + 1) + "\t|");
 			for (int j = 0; j < 10; j++)
 			{
 				if(grid.empty(new Position(j, i)))
@@ -128,6 +135,7 @@ public class BattleshipPlayer
 				{
 					System.out.print(grid.boatInitial(new Position(j, i)));
 				}
+				System.out.print("|");
 			}
 			System.out.println("");
 		}
