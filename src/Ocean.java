@@ -162,6 +162,10 @@ public class Ocean
 	{
 		int col = pos.columnIndex();
 		int row = pos.rowIndex();
+		/*
+		 * debug
+		*/
+		System.out.println(col + " " + row);
 		if(grid[col][row] != '.')
 		{
 			return grid[col][row];

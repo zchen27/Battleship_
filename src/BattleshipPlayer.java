@@ -62,7 +62,7 @@ public class BattleshipPlayer
 		Scanner sc = new Scanner(System.in);
 		System.out.println("INSERT ROW");
 		row = sc.nextInt();
-		if (row < 0 || row > 9)
+		if (row < 1 || row > 10)
 		{
 			System.out.println("INVALID ROW");
 			promptRow();
@@ -84,7 +84,7 @@ public class BattleshipPlayer
 	{
 		grid = getGrid();
 		updateGrid(pos, hit, initial);
-		
+		printGrid();
 		System.out.println("Turn " + turns);
 		if (hit)
 		{
@@ -110,7 +110,7 @@ public class BattleshipPlayer
 	
 	public void printGrid()
 	{
-		System.out.print(" \tABCDEFGHIJ");
+		System.out.println(" \tABCDEFGHIJ");
 		for (int i = 0; i < 10; i++)
 		{
 			System.out.print((i + 1) + "\t");

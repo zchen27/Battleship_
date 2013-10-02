@@ -23,6 +23,8 @@ public class BattleshipGame
 		boolean gameOver = false;
 		boolean tooManyTurns = false;
 		
+		ocean.placeAllBoats();
+		lePlayer.startGame();
 		while(!tooManyTurns && !gameOver)
 		{
 			pos = lePlayer.shoot();

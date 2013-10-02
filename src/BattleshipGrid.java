@@ -10,7 +10,7 @@ public class BattleshipGrid
 	{
 		for (int i = 0; i < grid.length; i++)
 		{
-			for (int j = 0; j < grid.length; i++)
+			for (int j = 0; j < grid.length; j++)
 			{
 				grid[i][j] = '.';
 			}
@@ -48,9 +48,9 @@ public class BattleshipGrid
 		int row = pos.rowIndex();
 		if (grid[col][row] == '*')
 		{
-			return false;
+			return true;
 		}
-		return true;
+		return false;
     }
     
     public boolean empty(Position pos)
@@ -59,9 +59,9 @@ public class BattleshipGrid
 		int row = pos.rowIndex();
 		if (grid[col][row] == '.')
 		{
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	public char boatInitial(Position pos)
