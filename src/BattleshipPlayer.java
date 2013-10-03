@@ -35,8 +35,8 @@ public class BattleshipPlayer
 	
 	public Position shoot()
 	{
-		char col = 'A';
-		int row = 1;
+		char col;
+		int row;
 		Position pos;
 		
 		try
@@ -47,6 +47,7 @@ public class BattleshipPlayer
 		}
 		catch (Exception e)
 		{
+			System.out.println("HINT: Column is a char, and Row is an int.");
 			pos = shoot();
 		}
 		return pos;
