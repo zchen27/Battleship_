@@ -143,7 +143,6 @@ public class BattleshipPlayer
 			}
 			System.out.println("");
 		}
-		
 	}
 	
 }
