@@ -23,7 +23,7 @@ public class BattleshipPlayer
 	private void insertName()
 	{
 		Scanner sc = new Scanner(System.in);
-		System.out.print("INSERT NAME HERE");
+		System.out.println("INSERT NAME HERE");
 		name = sc.nextLine();
 		System.out.println("WELCOME TO BATTLESHIP, " + name);
 	}
@@ -35,11 +35,21 @@ public class BattleshipPlayer
 	
 	public Position shoot()
 	{
-		char col;
-		int row;
-		col = promptCol();
-		row = promptRow();
-		return new Position(col, row);
+		char col = 'A';
+		int row = 1;
+		Position pos;
+		
+		try
+		{
+			col = promptCol();
+			row = promptRow();
+			pos = new Position(col, row);
+		}
+		catch (Exception e)
+		{
+			pos = shoot();
+		}
+		return pos;
 	}
 	
 	private char promptCol()
@@ -51,28 +61,21 @@ public class BattleshipPlayer
 		if ((byte)col < (byte)'A' || (byte)col > (byte)'J')
 		{
 			System.out.println("INVALID COLUMN");
-			promptCol();
+			col = promptCol();
 		}
 		return col;
 	}
 	
 	private int promptRow()
 	{
-		int row;
+		int row = 1;
 		Scanner sc = new Scanner(System.in);
 		System.out.println("INSERT ROW");
-		try
-		{
-			row = sc.nextInt();
-		}
-		catch(Exception e)
-		{
-			promptRow();
-		}
+		row = sc.nextInt();
 		if (row < 1 || row > 10)
 		{
 			System.out.println("INVALID ROW");
-			promptRow();
+			row = promptRow();
 		}
 		return row;
 	}
