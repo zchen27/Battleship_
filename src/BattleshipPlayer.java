@@ -94,27 +94,27 @@ public class BattleshipPlayer
 	{
 		grid = getGrid();
 		updateGrid(pos, hit, initial);
-		printGrid();
 		System.out.println("Turn " + turns);
+		printGrid();
 		if (hit)
 		{
-			System.out.println(boatName + " was hit!");
+			System.out.println(boatName + " was hit. Good thing they aren't shooting back.");
 		}
 		else
 		{
-			System.out.println("Someone else take over the gun!");
+			System.out.println("Nope, gotta try harder");
 		}
 		if (sunk)
 		{
-			System.out.println("Target is knocked out, find another target.");
+			System.out.println("Sleep with the fishes, " + boatName + "! It was nice knowing you.");
 		}
 		if (tooManyTurns)
 		{
-			System.out.println("Ammunition expended!");
+			System.out.println("Please do not force me to insult your intelligence, but you failed to hit a maximum of 100 squares in 100 turns");
 		}
 		if (gameOver)
 		{
-			System.out.println("Fall back, we've had enough for today");
+			System.out.println("Well, you won.");
 		}	
 	}
 	
