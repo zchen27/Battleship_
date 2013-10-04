@@ -4,13 +4,13 @@ public class BattleshipGame
 {
 	private int turns;
 	private Ocean ocean;
-	private BattleshipPlayer lePlayer;
+	private BattleshipPlayer currentPlayer;
 	
 	public BattleshipGame(BattleshipPlayer player)
 	{
 		turns = 0;
 		ocean = new Ocean();
-		lePlayer = player;
+		currentPlayer = player;
 	}
 	
 	public void play()
@@ -24,10 +24,10 @@ public class BattleshipGame
 		boolean tooManyTurns = false;
 		
 		ocean.placeAllBoats();
-		lePlayer.startGame();
+		currentPlayer.startGame();
 		while(!tooManyTurns && !gameOver)
 		{
-			pos = lePlayer.shoot();
+			pos = currentPlayer.shoot();
 			ocean.shootAt(pos);
 			turns++;
 			hit = ocean.hit(pos);
@@ -38,11 +38,11 @@ public class BattleshipGame
 			{
 				gameOver = true;
 			}
-			if(turns > 99)
+			if(turns > 100)
 			{
 				tooManyTurns = true;
 			}
-			lePlayer.updatePlayer(pos, hit, initial, boatName, sunk, gameOver, tooManyTurns, turns);
+			currentPlayer.updatePlayer(pos, hit, initial, boatName, sunk, gameOver, tooManyTurns, turns);
 		}
 	}
 	
