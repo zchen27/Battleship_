@@ -22,7 +22,6 @@ public class BattleshipGame
 		boolean sunk;
 		boolean gameOver = false;
 		boolean tooManyTurns = false;
-		
 		ocean.placeAllBoats();
 		currentPlayer.startGame();
 		while(!tooManyTurns && !gameOver)
@@ -38,7 +37,7 @@ public class BattleshipGame
 			{
 				gameOver = true;
 			}
-			if(turns > 100)
+			if(turns > 99)
 			{
 				tooManyTurns = true;
 			}

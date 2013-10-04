@@ -94,18 +94,8 @@ public class BattleshipPlayer
 	public void updatePlayer(Position pos, boolean hit, char initial, String boatName, boolean sunk, boolean gameOver, boolean tooManyTurns, int turns)
 	{
 		grid = getGrid();
-		System.out.println("Turn " + turns);
-		if (tooManyTurns)
-		{
-			System.out.println("Please do not force me to insult your intelligence, but you failed to hit a maximum of 100 squares in 100 turns");
-			return;
-		}
-		if (gameOver)
-		{
-			System.out.println("Well, you won.");
-			return;
-		}
 		updateGrid(pos, hit, initial);
+		System.out.println(" Results from Turn " + turns);
 		printGrid();
 		if (hit)
 		{
@@ -119,6 +109,14 @@ public class BattleshipPlayer
 		{
 			System.out.println("Sleep with the fishes, " + boatName + "! It was nice knowing you.");
 		}
+		if (tooManyTurns)
+		{
+			System.out.println("Please do not force me to insult your intelligence, but you failed to hit a maximum of 100 squares in 100 turns");
+		}
+		if (gameOver)
+		{
+			System.out.println("Well, you won.");
+		}	
 	}
 	
 	public void printGrid()
