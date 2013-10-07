@@ -8,7 +8,7 @@ public class PlayerEvaluator
 		turns = new int[runs];
 		for(int i = 0; i < runs; i++)
 		{
-			BattleshipGame game = new BattleshipGame(new ComputerBattleshipPlayer());
+			BattleshipGame game = new BattleshipGame(player);
 			turns[i] = game.play();
 		}
 	}

@@ -2,7 +2,11 @@ import java.util.*;
 
 public class ComputerBattleshipPlayer extends BattleshipPlayer
 {
-	private BattleshipGrid grid;
+
+	public ComputerBattleshipPlayer()
+	{
+		super();
+	}
 	
 	@Override
 	public void updatePlayer(Position pos, boolean hit, char initial, String boatName, boolean sunk, boolean gameOver, boolean tooManyTurns, int turns)
@@ -23,7 +27,7 @@ public class ComputerBattleshipPlayer extends BattleshipPlayer
 		int col = random.nextInt(10);
 		int row = random.nextInt(10);
 		Position pos = new Position(col, row);
-		if(!grid.empty(pos))
+		if(!super.getGrid().empty(pos))
 		{
 			pos = shoot();
 		}
