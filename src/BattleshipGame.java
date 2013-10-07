@@ -13,7 +13,7 @@ public class BattleshipGame
 		currentPlayer = player;
 	}
 	
-	public void play()
+	public int play()
 	{
 		Position pos;
 		boolean hit;
@@ -43,6 +43,7 @@ public class BattleshipGame
 			}
 			currentPlayer.updatePlayer(pos, hit, initial, boatName, sunk, gameOver, tooManyTurns, turns);
 		}
+		return turns;
 	}
 	
 }
