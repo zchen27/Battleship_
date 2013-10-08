@@ -104,7 +104,6 @@ public class Boat
 	public void hit(Position test)
 	{
 		int i = indexOf(test);
-		System.out.println(i);
 		if(i > -1 && i < positions.length)
 		{
 			hits[i] = true;

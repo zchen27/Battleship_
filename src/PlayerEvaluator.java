@@ -1,51 +1,44 @@
 
 public class PlayerEvaluator
 {
-	private int[] turns;
+	int min = 100;
+	int max = 0;
+	float avg = 0;
 	
 	public PlayerEvaluator(ComputerBattleshipPlayer player, int runs)
 	{
-		turns = new int[runs];
+		int temp;
+		int sum = 0;
 		for(int i = 0; i < runs; i++)
 		{
 			BattleshipGame game = new BattleshipGame(player);
-			turns[i] = game.play();
+			temp = game.play();
+			if(temp > max)
+			{
+				max = temp;
+			}
+			if(temp < min)
+			{
+				min = temp;
+			}
+			sum += temp;
 		}
+		avg = sum / runs;
 	}
 	
 	public int maxTurns()
 	{
-		int currentMax = 0;
-		for(int i = 0; i < turns.length; i++)
-		{
-			if(turns[i] > currentMax)
-			{
-				currentMax = turns[i];
-			}
-		}
-		return currentMax;
+		return max;
 	}
 	
 	public int minTurns()
 	{
-		int currentMin = 100;
-		for(int i = 0; i < turns.length; i++)
-		{
-			if(turns[i] < currentMin)
-			{
-				currentMin = turns[i];
-			}
-		}
-		return currentMin;
+		return min;
 	}
 	
 	public float averageTurns()
 	{
-		float sum = 0;
-		for(int i = 0; i < turns.length; i++)
-		{
-			sum += turns[i];
-		}
-		return sum / turns.length;
+		
+		return avg;
 	}
 }
