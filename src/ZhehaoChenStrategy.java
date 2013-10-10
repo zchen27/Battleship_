@@ -23,34 +23,43 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 			return null;
 		}
 		
-		private void setCarrierForbidden()
-		{
-			int[] defaultForbidden = {5, 6, 7, 8, 9};
-			carrierForbidden = new ArrayList();
-			
-		}
-		
-		private void setBattleshipForbidden()
+		private void setCarrierForbidden(String dir)
 		{
 			int[] defaultForbidden = {6, 7, 8, 9};
+			carrierForbidden = new ArrayList();
+			if(dir.equalsIgnoreCase("horizontal"))
+			{
+				for(int i = 0; i < 10; i++)
+				{
+					for(int j = 0; j < defaultForbidden.length; j++)
+					{
+						carrierForbidden.add(new Position(defaultForbidden[j], i));
+					}
+				}
+			}
+		}
+		
+		private void setBattleshipForbidden(String dir)
+		{
+			int[] defaultForbidden = {7, 8, 9};
 			battleshipForbidden = new ArrayList();
 		}
 		
-		private void setCruiserForbidden()
+		private void setCruiserForbidden(String dir)
 		{
-			int[] defaultForbidden = {7, 8, 9};
+			int[] defaultForbidden = {8, 9};
 			cruiserForbidden = new ArrayList();
 		}
 		
-		private void setSubmarineForbidden()
+		private void setSubmarineForbidden(String dir)
 		{
-			int[] defaultForbidden = {7, 8, 9};
+			int[] defaultForbidden = {8, 9};
 			submarineForbidden = new ArrayList();
 		}
 		
-		private void setDestroyerForbidden()
+		private void setDestroyerForbidden(String dir)
 		{
-			int[] defaultForbidden = {8, 9};
+			int[] defaultForbidden = {9};
 			destroyerForbidden = new ArrayList();
 		}
 		

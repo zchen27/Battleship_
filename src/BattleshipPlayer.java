@@ -13,7 +13,7 @@ public class BattleshipPlayer
 	public void startGame()
 	{
 		grid = new BattleshipGrid();
-		if (name == null && this.getClass().getName().equals("BattleshipPlayer"))
+		if (name == null)
 		{
 			insertName();
 		}
