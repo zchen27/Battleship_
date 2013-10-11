@@ -37,6 +37,16 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 					}
 				}
 			}
+			if(dir.equalsIgnoreCase("vertical"))
+			{
+				for(int i = 0; i < 10; i++)
+				{
+					for(int j = 0; j < defaultForbidden.length; j++)
+					{
+						carrierForbidden.add(new Position(i, defaultForbidden[j]));
+					}
+				}
+			}
 		}
 		
 		private void setBattleshipForbidden(String dir)

@@ -1,5 +1,5 @@
-import java.util.*;
 import java.lang.reflect.*;
+import java.util.*;
 
 public class ComputerBattleshipPlayer extends BattleshipPlayer
 {
@@ -33,8 +33,16 @@ public class ComputerBattleshipPlayer extends BattleshipPlayer
 	@Override
 	public void startGame()
 	{
-		BattleshipPlayer test = new BattleshipPlayer();
-		
+		try
+		{
+			System.out.println(this.getClass().getSuperClass().getDeclaredFields().length);
+			//Field superName = this.getClass().getDeclaredFields()[0];
+			//superName.setAccessible(true);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
 	}
 	
 }
