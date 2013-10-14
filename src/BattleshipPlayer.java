@@ -3,7 +3,7 @@ import java.util.*;
 public class BattleshipPlayer
 {
 	private String name;
-	private BattleshipGrid grid;
+	protected BattleshipGrid grid;
 	
 	public BattleshipPlayer()
 	{
