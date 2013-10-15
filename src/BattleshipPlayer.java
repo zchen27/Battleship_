@@ -3,7 +3,7 @@ import java.util.*;
 public class BattleshipPlayer
 {
 	private String name;
-	protected BattleshipGrid grid;
+	private BattleshipGrid grid;
 	
 	public BattleshipPlayer()
 	{
@@ -12,12 +12,16 @@ public class BattleshipPlayer
 	
 	public void startGame()
 	{
-		grid = new BattleshipGrid();
+		initializeGrid();
 		if (name == null)
 		{
 			insertName();
-		}
-		
+		}	
+	}
+	
+	public void initializeGrid()
+	{
+		grid = new BattleshipGrid();
 	}
 	
 	private void insertName()

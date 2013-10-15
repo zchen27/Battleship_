@@ -1,9 +1,9 @@
 
 public class PlayerEvaluator
 {
-	int min = 100;
-	int max = 0;
-	float avg = 0;
+	private int min = 100;
+	private int max = 0;
+	private float avg = 0;
 	
 	public PlayerEvaluator(ComputerBattleshipPlayer player, int runs)
 	{
@@ -23,7 +23,7 @@ public class PlayerEvaluator
 			}
 			sum += temp;
 		}
-		avg = sum / runs;
+		avg = (float) sum / runs;
 	}
 	
 	public int maxTurns()
