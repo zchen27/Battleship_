@@ -10,21 +10,27 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 	
 	private enum Parity
 	{
-		TWO,
-		THREE,
-		FOUR,
-		FIVE
+		TWO (2),
+		THREE (3),
+		FOUR (4),
+		FIVE (5);
+		
+		private final int parity;
+		private int parity()
+		{
+			return this.parity;
+		}
+		Parity(int i)
+		{
+			this.parity = i;
+		}
 	}
 	
 	private Status status;
 	private Parity parity;
 	private int maxHoleSize;
 	private ArrayList<Position> candidates;
-	private boolean CASunk = false;
-	private boolean BBSunk = false;
-	private boolean CCSunk = false;
-	private boolean SSSunk = false;
-	private boolean DDSunk = false;
+	
 	
 	public ZhehaoChenStrategy()
 	{
@@ -35,25 +41,24 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 	
 	private void generateCandidates()
 	{
-		for(int i = 0; i < 10; i++)
+		int div = parity.parity() - 1;
+		for(int i = 0; i < 9; i++)
 		{
-			for(int j = 0; j < 5; j++)
+			for(int j = 0; j < 9; j++)
 			{
-				if(i % 2 != 0)
+				if((i / div == 0) || (j / div == 0))
 				{
-					candidates.add(new Position(i, (2 * j + 1)));
-				}
-				else
-				{
-					candidates.add(new Position(i, (2 * j)));
+					candidates.add(new Position(i , j));
 				}
 			}
 		}
+		
 	}
 	
-	private Position nextPosition()
+	private Position nextHuntPosition()
 	{
-		return null;
+		return candidates.remove(0);
 	}
+	
 	
 }
