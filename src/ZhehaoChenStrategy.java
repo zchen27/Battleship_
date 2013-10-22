@@ -39,25 +39,95 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		candidates = new ArrayList();
 	}
 	
-	private void generateCandidates()
+	private class ProbabilityAnalyzer
 	{
-		int div = parity.parity() - 1;
-		for(int i = 0; i < 9; i++)
+		private BattleshipGrid grid;
+		private ArrayList<Position> filled;
+		private int[][] probability;
+		
+		ProbabilityAnalyzer(BattleshipGrid g)
 		{
-			for(int j = 0; j < 9; j++)
-			{
-				if((i / div == 0) || (j / div == 0))
-				{
-					candidates.add(new Position(i , j));
-				}
-			}
+			grid = g;
 		}
 		
-	}
-	
-	private Position nextHuntPosition()
-	{
-		return candidates.remove(0);
+		private int lengthConverter(String boatName)
+		{
+			int len;
+			switch(boatName)
+			{
+				case "AIRCRAFT CARRIER":
+					len = 5;
+					break;
+				case "BATTLESHIP":
+					len = 4;
+					break;
+				case "CRUISER":
+					len = 3;
+					break;
+				case "SUBMARINE":
+					len = 3;
+					break;
+				case "DESTROYER":
+					len = 2;
+					break;
+				default:
+					len = 0;
+					break;
+			}
+			return len;
+		}
+		
+		private ArrayList<Position> generateDeFaultForbidden(String boatName, String direction)
+		{
+			int max;
+			ArrayList<Position> forbidden = new ArrayList();
+			boatName = boatName.toUpperCase();
+			direction = direction.toUpperCase();
+			max = lengthConverter(boatName) - 1;
+			for(int i = 0; i <= max; i++)
+			{
+				for(int j = 0; j < 10; j++)
+				{
+					switch(direction)
+					{
+						case "VERTICAL":
+							forbidden.add(new Position(j, i));
+							break;
+						case "HORIZONTAL":
+							forbidden.add(new Position(i, j));
+							break;
+						default:
+							break;
+					}
+				}
+			}
+			return forbidden;
+		}
+		
+		private ArrayList<Position> generateAdditionalForbidden(String boatName, String direction)
+		{
+			ArrayList<Position> forbidden = new ArrayList();
+			direction = direction.toUpperCase();
+			for(Position p: filled)
+			{
+				int col = p.columnIndex();
+				int row = p.rowIndex();
+				for(int i = 0; i < lengthConverter(boatName); i++)
+				{
+					switch(direction)
+					{
+						case "VERTICAL":
+							forbidden.add(new Position(col, row - i));
+							break;
+							
+						case "HORIZONTAL":
+							forbidden.add(new Position(col - i, row));
+							break;
+					}
+				}
+			}
+			return forbidden;
+		}
 	}
 	
 	
