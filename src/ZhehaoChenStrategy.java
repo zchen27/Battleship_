@@ -30,6 +30,7 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 	private Parity parity;
 	private int maxHoleSize;
 	private ArrayList<Position> candidates;
+	private ArrayList<Integer> stillAlive = new ArrayList();
 	
 	
 	public ZhehaoChenStrategy()
@@ -37,6 +38,23 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		status = Status.HUNT;
 		parity = Parity.TWO;
 		candidates = new ArrayList();
+		stillAlive.add(5);
+		stillAlive.add(4);
+		stillAlive.add(3);
+		stillAlive.add(3);
+		stillAlive.add(2);
+	}
+	
+	@Override
+	public String playerName()
+	{
+		return "Zhehao Chen Strategy";
+	}
+	
+	@Override
+	public void updatePlayer(Position pos, boolean hit, char initial, String boatName, boolean sunk, boolean gameOver, boolean tooManyTurns, int turns)
+	{
+		updateGrid(pos, hit, initial);
 	}
 	
 	private class ProbabilityAnalyzer
@@ -48,6 +66,43 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		ProbabilityAnalyzer(BattleshipGrid g)
 		{
 			grid = g;
+			fillFilled();
+		}
+		
+		private void analyze()
+		{
+			String[] names = {"AIRCRAFT CARRIER", "BATTLESHIP", "CRUISER", "SUBMARINE", "DESTROYER"};
+			String[] directions = {"VERTICAL", "HORIZONTAL"};
+			Ocean testOcean = new Ocean();
+			for(int i = 0; i < names.length; i++)
+			{
+				for(int j = 0; j < directions.length; j++)
+				{
+					for(int col = 0; col < 10; col++)
+					{
+						for(int row = 0; row < 10; row++)
+						{
+							
+						}
+					}
+				}
+			}
+			
+		}
+		
+		private void fillFilled()
+		{
+			for(int i = 0; i < 10; i++)
+			{
+				for(int j = 0; j < 10; j++)
+				{
+					Position p = new Position(i, j);
+					if(!grid.empty(p))
+					{
+						filled.add(p);
+					}
+				}
+			}
 		}
 		
 		private int lengthConverter(String boatName)
@@ -77,7 +132,12 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 			return len;
 		}
 		
-		private ArrayList<Position> generateDeFaultForbidden(String boatName, String direction)
+		private ArrayList<Position> generateHuntForbidden(String boatName, String direction)
+		{
+			return mergePositions(generateAlwaysForbidden(boatName, direction), generateFilledForbidden(boatName, direction));
+		}
+		
+		private ArrayList<Position> generateAlwaysForbidden(String boatName, String direction)
 		{
 			int max;
 			ArrayList<Position> forbidden = new ArrayList();
@@ -104,7 +164,7 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 			return forbidden;
 		}
 		
-		private ArrayList<Position> generateAdditionalForbidden(String boatName, String direction)
+		private ArrayList<Position> generateFilledForbidden(String boatName, String direction)
 		{
 			ArrayList<Position> forbidden = new ArrayList();
 			direction = direction.toUpperCase();
@@ -119,7 +179,6 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 						case "VERTICAL":
 							forbidden.add(new Position(col, row - i));
 							break;
-							
 						case "HORIZONTAL":
 							forbidden.add(new Position(col - i, row));
 							break;
@@ -128,7 +187,21 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 			}
 			return forbidden;
 		}
+		
+		private ArrayList<Position> mergePositions(ArrayList... lists)
+		{
+			HashSet<Position> merge = new LinkedHashSet();
+			ArrayList<Position> result = new ArrayList();
+			if(lists.length == 1)
+			{
+				return lists[0];
+			}
+			for(int i = 0; i < lists.length; i++)
+			{
+				merge.addAll(lists[i]);
+			}
+			result.addAll(merge);
+			return result;
+		}
 	}
-	
-	
 }
