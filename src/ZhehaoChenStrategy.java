@@ -59,47 +59,30 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 	
 	private class ProbabilityAnalyzer
 	{
-		private BattleshipGrid grid;
 		private ArrayList<Position> filled;
-		private int[][] probability;
+		private int[][] probability = new int[10][10];
+		private char[][] testBoard = new char[10][10];
 		
 		ProbabilityAnalyzer(BattleshipGrid g)
-		{
-			grid = g;
-			fillFilled();
-		}
-		
-		private void analyze()
-		{
-			String[] names = {"AIRCRAFT CARRIER", "BATTLESHIP", "CRUISER", "SUBMARINE", "DESTROYER"};
-			String[] directions = {"VERTICAL", "HORIZONTAL"};
-			Ocean testOcean = new Ocean();
-			for(int i = 0; i < names.length; i++)
-			{
-				for(int j = 0; j < directions.length; j++)
-				{
-					for(int col = 0; col < 10; col++)
-					{
-						for(int row = 0; row < 10; row++)
-						{
-							
-						}
-					}
-				}
-			}
-			
-		}
-		
-		private void fillFilled()
 		{
 			for(int i = 0; i < 10; i++)
 			{
 				for(int j = 0; j < 10; j++)
 				{
-					Position p = new Position(i, j);
-					if(!grid.empty(p))
+					Position current = new Position(i, j);
+					if(g.hit(new Position(i, j)))
 					{
-						filled.add(p);
+						testBoard[i][j] = g.boatInitial(current);
+						filled.add(current);
+					}
+					else if(g.miss(current))
+					{
+						testBoard[i][j] = '*';
+						filled.add(current);
+					}
+					else if(g.empty(current))
+					{
+						testBoard[i][j] = '.';
 					}
 				}
 			}
