@@ -28,7 +28,6 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 	
 	private Status status;
 	private Parity parity;
-	private int maxHoleSize;
 	private ArrayList<Position> candidates;
 	private ArrayList<Integer> stillAlive = new ArrayList();
 	
@@ -51,140 +50,60 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		return "Zhehao Chen Strategy";
 	}
 	
-	@Override
-	public void updatePlayer(Position pos, boolean hit, char initial, String boatName, boolean sunk, boolean gameOver, boolean tooManyTurns, int turns)
+	private Position getNextTarget()
 	{
-		updateGrid(pos, hit, initial);
+		if(status.equals(Status.HUNT))
+		{
+			for(int col = 0; col < 10; col++)
+			{
+				for(int row = 0; row < 10; row++)
+				{
+					if(checkParity(new Position(col, row)))
+					{
+						return new Position(col, row);
+					}
+				}
+			}
+		}
+		else if(status.equals(Status.TARGET))
+		{
+			
+		}
+		return null;
 	}
 	
-	private class ProbabilityAnalyzer
+	private boolean checkParity(Position pos)
 	{
-		private ArrayList<Position> filled;
-		private int[][] probability = new int[10][10];
-		private char[][] testBoard = new char[10][10];
-		
-		ProbabilityAnalyzer(BattleshipGrid g)
+		int col = pos.columnIndex();
+		int row = pos.rowIndex();
+		if(!getGrid().empty(new Position(col, row)))
 		{
-			for(int i = 0; i < 10; i++)
+			return false;
+		}
+		for(int i = 1; i < parity.parity(); i++)
+		{
+			try
 			{
-				for(int j = 0; j < 10; j++)
+				if(!getGrid().empty(new Position(col + i, row)))
 				{
-					Position current = new Position(i, j);
-					if(g.hit(new Position(i, j)))
-					{
-						testBoard[i][j] = g.boatInitial(current);
-						filled.add(current);
-					}
-					else if(g.miss(current))
-					{
-						testBoard[i][j] = '*';
-						filled.add(current);
-					}
-					else if(g.empty(current))
-					{
-						testBoard[i][j] = '.';
-					}
+					return false;
 				}
 			}
-		}
-		
-		private int lengthConverter(String boatName)
-		{
-			int len;
-			switch(boatName)
+			catch(Exception e)
 			{
-				case "AIRCRAFT CARRIER":
-					len = 5;
-					break;
-				case "BATTLESHIP":
-					len = 4;
-					break;
-				case "CRUISER":
-					len = 3;
-					break;
-				case "SUBMARINE":
-					len = 3;
-					break;
-				case "DESTROYER":
-					len = 2;
-					break;
-				default:
-					len = 0;
-					break;
 			}
-			return len;
-		}
-		
-		private ArrayList<Position> generateHuntForbidden(String boatName, String direction)
-		{
-			return mergePositions(generateAlwaysForbidden(boatName, direction), generateFilledForbidden(boatName, direction));
-		}
-		
-		private ArrayList<Position> generateAlwaysForbidden(String boatName, String direction)
-		{
-			int max;
-			ArrayList<Position> forbidden = new ArrayList();
-			boatName = boatName.toUpperCase();
-			direction = direction.toUpperCase();
-			max = lengthConverter(boatName) - 1;
-			for(int i = 0; i <= max; i++)
+			
+			try
 			{
-				for(int j = 0; j < 10; j++)
+				if(!getGrid().empty(new Position(col, row + i)))
 				{
-					switch(direction)
-					{
-						case "VERTICAL":
-							forbidden.add(new Position(j, i));
-							break;
-						case "HORIZONTAL":
-							forbidden.add(new Position(i, j));
-							break;
-						default:
-							break;
-					}
+					return false;
 				}
 			}
-			return forbidden;
-		}
-		
-		private ArrayList<Position> generateFilledForbidden(String boatName, String direction)
-		{
-			ArrayList<Position> forbidden = new ArrayList();
-			direction = direction.toUpperCase();
-			for(Position p: filled)
+			catch(Exception e)
 			{
-				int col = p.columnIndex();
-				int row = p.rowIndex();
-				for(int i = 0; i < lengthConverter(boatName); i++)
-				{
-					switch(direction)
-					{
-						case "VERTICAL":
-							forbidden.add(new Position(col, row - i));
-							break;
-						case "HORIZONTAL":
-							forbidden.add(new Position(col - i, row));
-							break;
-					}
-				}
 			}
-			return forbidden;
 		}
-		
-		private ArrayList<Position> mergePositions(ArrayList... lists)
-		{
-			HashSet<Position> merge = new LinkedHashSet();
-			ArrayList<Position> result = new ArrayList();
-			if(lists.length == 1)
-			{
-				return lists[0];
-			}
-			for(int i = 0; i < lists.length; i++)
-			{
-				merge.addAll(lists[i]);
-			}
-			result.addAll(merge);
-			return result;
-		}
+		return true;
 	}
 }

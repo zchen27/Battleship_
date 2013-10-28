@@ -62,7 +62,10 @@ public class ThreadedAnalyzer
 		public void spamPlace()
 		{
 			int[] lengths = makeLengths();
-			
+			for(int i = 0; i < lengths.length; i++)
+			{
+				
+			}
 		}
 		
 		public void run()
