@@ -5,7 +5,7 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 	private enum Status
 	{
 		HUNT,
-		TARGET
+		TARGET;
 	}
 	
 	private enum Parity
@@ -15,33 +15,37 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		FOUR (4),
 		FIVE (5);
 		
-		private final int parity;
-		private int parity()
-		{
-			return this.parity;
-		}
+		final int parity;
 		Parity(int i)
 		{
 			this.parity = i;
 		}
+
+	}
+	
+	private enum Facing
+	{
+		LEFT,
+		RIGHT,
+		UP,
+		DOWN;
 	}
 	
 	private Status status;
 	private Parity parity;
-	private ArrayList<Position> candidates;
-	private ArrayList<Integer> stillAlive = new ArrayList();
-	
+	private Facing facing;
+	private ArrayList<Parity> stillAlive;
 	
 	public ZhehaoChenStrategy()
 	{
 		status = Status.HUNT;
+		stillAlive = new ArrayList();
+		stillAlive.add(Parity.TWO);
+		stillAlive.add(Parity.THREE);
+		stillAlive.add(Parity.THREE);
+		stillAlive.add(Parity.FOUR);
+		stillAlive.add(Parity.FIVE);
 		parity = Parity.TWO;
-		candidates = new ArrayList();
-		stillAlive.add(5);
-		stillAlive.add(4);
-		stillAlive.add(3);
-		stillAlive.add(3);
-		stillAlive.add(2);
 	}
 	
 	@Override
@@ -50,25 +54,38 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		return "Zhehao Chen Strategy";
 	}
 	
-	private Position getNextTarget()
+	
+	private Parity smallestParity()
 	{
-		if(status.equals(Status.HUNT))
+		Parity min = Parity.FIVE;
+		for(Parity p: stillAlive)
 		{
-			for(int col = 0; col < 10; col++)
+			if(p.compareTo(min) < 0)
 			{
-				for(int row = 0; row < 10; row++)
+				min = p;
+			}
+		}
+		return min;
+	}
+	
+	private Position getNextHUNTTarget()
+	{
+		Position target;
+		for(int col = 0; col < 10; col++)
+		{
+			for(int row = 0; row < 10; row++)
+			{
+				if(checkParity(new Position(col, row)))
 				{
-					if(checkParity(new Position(col, row)))
-					{
-						return new Position(col, row);
-					}
+					target = new Position(col, row);
 				}
 			}
 		}
-		else if(status.equals(Status.TARGET))
-		{
-			
-		}
+		return null;
+	}
+	
+	private Position getNextTARGETTarget()
+	{
 		return null;
 	}
 	
@@ -80,7 +97,7 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		{
 			return false;
 		}
-		for(int i = 1; i < parity.parity(); i++)
+		for(int i = 1; i < parity.parity; i++)
 		{
 			try
 			{
