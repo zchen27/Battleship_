@@ -5,7 +5,14 @@ public class OceanPlacementTest
 	
 	public static void main(String[] args)
 	{
-		ocean.placeAllBoats();
+		long begin = System.currentTimeMillis();
+		long end;
+		for(int i = 0; i < 1000000000; i++)
+		{
+			ocean.placeAllBoats();
+		}
+		end = System.currentTimeMillis();
+		System.out.println(begin - end);
 	}
 	
 }

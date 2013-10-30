@@ -25,15 +25,14 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 	
 	private enum Facing
 	{
-		LEFT,
-		RIGHT,
-		UP,
-		DOWN;
+		EAST,
+		NORTH,
+		WEST,
+		SOUTH;
 	}
 	
 	private Status status;
 	private Parity parity;
-	private Facing facing;
 	private ArrayList<Parity> stillAlive;
 	
 	public ZhehaoChenStrategy()
@@ -84,8 +83,44 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		return null;
 	}
 	
-	private Position getNextTARGETTarget()
+	private Position getNextTARGETTarget(Parity parity, Position position, char abrv)
 	{
+		int col = position.columnIndex();
+		int row = position.rowIndex();
+		Position target;
+		ArrayList<Facing> facing = new ArrayList();
+		facing.add(Facing.EAST);
+		facing.add(Facing.NORTH);
+		facing.add(Facing.WEST);
+		facing.add(Facing.SOUTH);
+		
+		Position east = new Position(col + 1, row);
+		Position north = new Position(col, row - 1);
+		Position west = new Position(col - 1, row);
+		Position south = new Position(col, row + 1);
+			
+		if(getGrid().boatInitial(east) != abrv && !getGrid().empty(east))
+		{
+				facing.remove(Facing.EAST);
+		}
+		else if(getGrid().boatInitial(north) != abrv && !getGrid().empty(north))
+		{
+				facing.remove(Facing.NORTH);
+		}
+		else if(getGrid().boatInitial(west) != abrv && !getGrid().empty(west))
+		{
+				facing.remove(Facing.WEST);
+		}
+		else if(getGrid().boatInitial(south) != abrv && !getGrid().empty(south))
+		{
+				facing.remove(Facing.SOUTH);
+		}
+		
+		for(int i = 0; i < parity.parity; i++)
+		{
+
+		}
+		
 		return null;
 	}
 	
