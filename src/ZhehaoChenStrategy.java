@@ -89,45 +89,77 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		int row = position.rowIndex();
 		Position target;
 		ArrayList<Facing> facing = new ArrayList();
+		Random random = new Random();
 		facing.add(Facing.EAST);
 		facing.add(Facing.NORTH);
 		facing.add(Facing.WEST);
 		facing.add(Facing.SOUTH);
+		
+		if(col == 0)
+		{
+			facing.remove(Facing.WEST);
+		}
+		else if(col == 9)
+		{
+			facing.remove(Facing.EAST);
+		}
+		
+		if(row == 0)
+		{
+			facing.remove(Facing.NORTH);
+		}
+		else if(row == 9)
+		{
+			facing.remove(Facing.SOUTH);
+		}
 		
 		Position east = new Position(col + 1, row);
 		Position north = new Position(col, row - 1);
 		Position west = new Position(col - 1, row);
 		Position south = new Position(col, row + 1);
 			
-		if(getGrid().boatInitial(east) != abrv && !getGrid().empty(east))
+		if(getGrid().boatInitial(east) != abrv || getGrid().miss(east))
 		{
-				facing.remove(Facing.EAST);
+			facing.remove(Facing.EAST);
 		}
-		else if(getGrid().boatInitial(north) != abrv && !getGrid().empty(north))
+		else if(getGrid().boatInitial(north) != abrv || getGrid().miss(north))
 		{
-				facing.remove(Facing.NORTH);
+			facing.remove(Facing.NORTH);
 		}
-		else if(getGrid().boatInitial(west) != abrv && !getGrid().empty(west))
+		else if(getGrid().boatInitial(west) != abrv || getGrid().miss(west))
 		{
-				facing.remove(Facing.WEST);
+			facing.remove(Facing.WEST);
 		}
-		else if(getGrid().boatInitial(south) != abrv && !getGrid().empty(south))
+		else if(getGrid().boatInitial(south) != abrv || getGrid().miss(south))
 		{
-				facing.remove(Facing.SOUTH);
+			facing.remove(Facing.SOUTH);
 		}
-		
-		for(int i = 0; i < parity.parity; i++)
+		int r = random.nextInt(facing.size());
+		switch(facing.get(r))
 		{
-
+			case EAST:
+				return east;
+			case NORTH:
+				return north;
+			case WEST:
+				return west;
+			case SOUTH:
+				return south;
+			default:
+				return null;
 		}
-		
-		return null;
 	}
 	
 	private boolean checkParity(Position pos)
 	{
 		int col = pos.columnIndex();
 		int row = pos.rowIndex();
+		
+		if(col - parity.parity < -1 || col + parity.parity > 10 || row - parity.parity < -1 || row + parity.parity > 10)
+		{
+			return false;
+		}
+		
 		if(!getGrid().empty(new Position(col, row)))
 		{
 			return false;
