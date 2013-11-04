@@ -53,6 +53,19 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		return "Zhehao Chen Strategy";
 	}
 	
+	@Override
+	public Position shoot()
+	{
+		if (status == Status.HUNT)
+		{
+			return getNextHUNTTarget();
+		}
+		else if(status == Status.TARGET)
+		{
+			
+		}
+		return null;
+	}
 	
 	private Parity smallestParity()
 	{
@@ -83,11 +96,11 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		return null;
 	}
 	
-	private Position getNextTARGETTarget(Parity parity, Position position, char abrv)
+	
+	private Position getNextTARGETTarget(Position position, char abrv)
 	{
 		int col = position.columnIndex();
 		int row = position.rowIndex();
-		Position target;
 		ArrayList<Facing> facing = new ArrayList();
 		Random random = new Random();
 		facing.add(Facing.EAST);
@@ -117,7 +130,18 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		Position north = new Position(col, row - 1);
 		Position west = new Position(col - 1, row);
 		Position south = new Position(col, row + 1);
-			
+		
+		if(getGrid().boatInitial(east) == abrv || getGrid().boatInitial(west) == abrv)
+		{
+			facing.remove(Facing.NORTH);
+			facing.remove(Facing.SOUTH);
+		}
+		if(getGrid().boatInitial(north) == abrv || getGrid().boatInitial(south) == abrv)
+		{
+			facing.remove(Facing.EAST);
+			facing.remove(Facing.WEST);
+		}
+		
 		if(getGrid().boatInitial(east) != abrv || getGrid().miss(east))
 		{
 			facing.remove(Facing.EAST);
@@ -134,6 +158,7 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		{
 			facing.remove(Facing.SOUTH);
 		}
+		
 		int r = random.nextInt(facing.size());
 		switch(facing.get(r))
 		{
@@ -166,26 +191,55 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		}
 		for(int i = 1; i < parity.parity; i++)
 		{
-			try
-			{
-				if(!getGrid().empty(new Position(col + i, row)))
-				{
-					return false;
-				}
-			}
-			catch(Exception e)
-			{
-			}
+			Position testE = null;
+			Position testN = null;
+			Position testW = null;
+			Position testS = null;
 			
-			try
+			if(col + i <= 9)
 			{
-				if(!getGrid().empty(new Position(col, row + i)))
+				testE = new Position(col + i, row);
+			}
+			if(col - i >= 0)
+			{
+				testW = new Position(col - i, row);
+			}
+			if(row + i <= 9)
+			{
+				testS = new Position(col, row + i);
+			}
+			if(row - i >= 0)
+			{
+				testN = new Position(col, row - i);
+			}
+		
+			if(testE != null)
+			{
+				if(!getGrid().empty(testE))
 				{
 					return false;
 				}
 			}
-			catch(Exception e)
+			if(testN != null)
 			{
+				if(!getGrid().empty(testN))
+				{
+					return false;
+				}
+			}
+			if(testW != null)
+			{
+				if(!getGrid().empty(testW))
+				{
+					return false;
+				}
+			}
+			if(testS != null)
+			{
+				if(!getGrid().empty(testS))
+				{
+					return false;
+				}
 			}
 		}
 		return true;
