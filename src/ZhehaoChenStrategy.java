@@ -10,15 +10,18 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 	
 	private enum Parity
 	{
-		TWO (2),
-		THREE (3),
-		FOUR (4),
-		FIVE (5);
+		D (2, 'D'),
+		C (3, 'C'),
+		S (3, 'S'),
+		B (4, 'B'),
+		A (5, 'A');
 		
+		final char name;
 		final int parity;
-		Parity(int i)
+		Parity(int i, char c)
 		{
 			this.parity = i;
+			this.name = c;
 		}
 
 	}
@@ -33,24 +36,37 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 	
 	private Status status;
 	private Parity parity;
+	private Position lastShot;
+	private char target;
 	private ArrayList<Parity> stillAlive;
 	
 	public ZhehaoChenStrategy()
 	{
+
+	}
+	
+	@Override
+	public void startGame()
+	{
 		status = Status.HUNT;
 		stillAlive = new ArrayList();
-		stillAlive.add(Parity.TWO);
-		stillAlive.add(Parity.THREE);
-		stillAlive.add(Parity.THREE);
-		stillAlive.add(Parity.FOUR);
-		stillAlive.add(Parity.FIVE);
-		parity = Parity.TWO;
+		stillAlive.add(Parity.D);
+		stillAlive.add(Parity.C);
+		stillAlive.add(Parity.S);
+		stillAlive.add(Parity.B);
+		stillAlive.add(Parity.A);
+		parity = Parity.D;
 	}
 	
 	@Override
 	public String playerName()
 	{
 		return "Zhehao Chen Strategy";
+	}
+	
+	public String author()
+	{
+		return "Zhehao Chen";
 	}
 	
 	
@@ -68,9 +84,30 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		return null;
 	}
 	
+	@Override
+	public void updatePlayer(Position pos, boolean hit, char initial, String boatName, boolean sunk, boolean gameOver, boolean tooManyTurns, int turns)
+	{
+		lastShot = pos;
+		if(sunk)
+		{
+			target = straggler();
+		}
+		else
+		{
+			if(hit)
+			{
+				target = initial;
+			}
+			else
+			{
+				target = '\u0000';
+			}
+		}
+	}
+	
 	private Parity smallestParity()
 	{
-		Parity min = Parity.FIVE;
+		Parity min = Parity.A;
 		for(Parity p: stillAlive)
 		{
 			if(p.compareTo(min) < 0)
@@ -83,25 +120,25 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 	
 	private Position getNextHUNTTarget()
 	{
-		Position target;
+		Position test;
 		for(int col = 0; col < 10; col++)
 		{
 			for(int row = 0; row < 10; row++)
 			{
 				if(checkParity(new Position(col, row)))
 				{
-					target = new Position(col, row);
+					test = new Position(col, row);
+					return test;
 				}
 			}
 		}
 		return null;
 	}
 	
-	
-	private Position getNextTARGETTarget(Position position, char abrv)
+	private Position getNextTARGETTarget(char abrv)
 	{
-		int col = position.columnIndex();
-		int row = position.rowIndex();
+		int col = lastShot.columnIndex();
+		int row = lastShot.rowIndex();
 		ArrayList<Facing> facing = new ArrayList();
 		Random random = new Random();
 		facing.add(Facing.EAST);
@@ -131,7 +168,7 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		Position north = new Position(col, row - 1);
 		Position west = new Position(col - 1, row);
 		Position south = new Position(col, row + 1);
-		
+			
 		if(getGrid().boatInitial(east) == abrv || getGrid().boatInitial(west) == abrv)
 		{
 			facing.remove(Facing.NORTH);
@@ -244,5 +281,25 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 			}
 		}
 		return true;
+	}
+	
+	private char straggler()
+	{
+		BattleshipGrid grid = getGrid();
+		for(int i = 0; i < 10; i++)
+		{
+			for(int j = 0; j < 10; j++)
+			{
+				char abrv = grid.boatInitial(new Position(i, j));
+				for(Parity p: stillAlive)
+				{
+					if(p.name == abrv)
+					{
+						return abrv;
+					}
+				}
+			}
+		}
+		return '\u0000';
 	}
 }
