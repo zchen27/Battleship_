@@ -53,6 +53,7 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		return "Zhehao Chen Strategy";
 	}
 	
+	
 	@Override
 	public Position shoot()
 	{
