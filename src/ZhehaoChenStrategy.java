@@ -26,19 +26,12 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 
 	}
 	
-	private enum Facing
-	{
-		EAST,
-		NORTH,
-		WEST,
-		SOUTH;
-	}
-	
 	private Status status;
 	private Parity parity;
 	private Position lastShot;
 	private char target;
-	private ArrayList<Parity> stillAlive;
+	private HashSet<Parity> stillAlive;
+	private HashSet<Position> targetStack;
 	
 	public ZhehaoChenStrategy()
 	{
@@ -49,13 +42,14 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 	public void startGame()
 	{
 		status = Status.HUNT;
-		stillAlive = new ArrayList();
+		stillAlive = new HashSet();
 		stillAlive.add(Parity.D);
 		stillAlive.add(Parity.C);
 		stillAlive.add(Parity.S);
 		stillAlive.add(Parity.B);
 		stillAlive.add(Parity.A);
 		parity = Parity.D;
+		targetStack = new HashSet();
 	}
 	
 	@Override
@@ -88,8 +82,16 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 	public void updatePlayer(Position pos, boolean hit, char initial, String boatName, boolean sunk, boolean gameOver, boolean tooManyTurns, int turns)
 	{
 		lastShot = pos;
+		parity = smallestParity();
 		if(sunk)
 		{
+			for(Parity p: stillAlive)
+			{
+				if(p.name == initial)
+				{
+					stillAlive.remove(p);
+				}
+			}
 			target = straggler();
 		}
 		else
@@ -139,78 +141,33 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 	{
 		int col = lastShot.columnIndex();
 		int row = lastShot.rowIndex();
-		ArrayList<Facing> facing = new ArrayList();
 		Random random = new Random();
-		facing.add(Facing.EAST);
-		facing.add(Facing.NORTH);
-		facing.add(Facing.WEST);
-		facing.add(Facing.SOUTH);
+		Position east = null;
+		Position west = null;
+		Position north = null;
+		Position south = null;
 		
-		if(col == 0)
+		if(col != 9)
 		{
-			facing.remove(Facing.WEST);
+			east = new Position(col + 1, row);
 		}
-		else if(col == 9)
+		else if(col != 0)
 		{
-			facing.remove(Facing.EAST);
-		}
-		
-		if(row == 0)
-		{
-			facing.remove(Facing.NORTH);
-		}
-		else if(row == 9)
-		{
-			facing.remove(Facing.SOUTH);
+			west = new Position(col - 1, row);
 		}
 		
-		Position east = new Position(col + 1, row);
-		Position north = new Position(col, row - 1);
-		Position west = new Position(col - 1, row);
-		Position south = new Position(col, row + 1);
-			
-		if(getGrid().boatInitial(east) == abrv || getGrid().boatInitial(west) == abrv)
+		if(row != 0)
 		{
-			facing.remove(Facing.NORTH);
-			facing.remove(Facing.SOUTH);
+			north = new Position(col, row - 1);
 		}
-		if(getGrid().boatInitial(north) == abrv || getGrid().boatInitial(south) == abrv)
+		else if(row != 9)
 		{
-			facing.remove(Facing.EAST);
-			facing.remove(Facing.WEST);
+			south = new Position(col, row + 1);
 		}
 		
-		if(getGrid().boatInitial(east) != abrv || getGrid().miss(east))
-		{
-			facing.remove(Facing.EAST);
-		}
-		else if(getGrid().boatInitial(north) != abrv || getGrid().miss(north))
-		{
-			facing.remove(Facing.NORTH);
-		}
-		else if(getGrid().boatInitial(west) != abrv || getGrid().miss(west))
-		{
-			facing.remove(Facing.WEST);
-		}
-		else if(getGrid().boatInitial(south) != abrv || getGrid().miss(south))
-		{
-			facing.remove(Facing.SOUTH);
-		}
 		
-		int r = random.nextInt(facing.size());
-		switch(facing.get(r))
-		{
-			case EAST:
-				return east;
-			case NORTH:
-				return north;
-			case WEST:
-				return west;
-			case SOUTH:
-				return south;
-			default:
-				return null;
-		}
+		
+		return null;
 	}
 	
 	private boolean checkParity(Position pos)
