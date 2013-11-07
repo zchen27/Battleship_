@@ -1,5 +1,9 @@
 import java.util.*;
 
+/*
+ * 
+ */
+
 public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 {	
 	private enum Status
@@ -24,6 +28,22 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 			this.name = c;
 		}
 
+	}
+	
+	private enum Direction
+	{
+		EAST (1, 0),
+		NORTH (0, -1),
+		WEST (-1, 0),
+		SOUTH(0, 1);
+		
+		final int dcol;
+		final int drow;
+		Direction(int c, int r)
+		{
+			dcol = c;
+			drow = r;
+		}
 	}
 	
 	private Status status;
@@ -137,37 +157,44 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		return null;
 	}
 	
-	private Position getNextTARGETTarget(char abrv)
+	private Position getNextTARGETTarget()
 	{
 		int col = lastShot.columnIndex();
 		int row = lastShot.rowIndex();
+		int size = toParity(target).parity;
 		Random random = new Random();
 		Position east = null;
 		Position west = null;
 		Position north = null;
 		Position south = null;
 		
-		if(col != 9)
-		{
-			east = new Position(col + 1, row);
-		}
-		else if(col != 0)
-		{
-			west = new Position(col - 1, row);
-		}
 		
-		if(row != 0)
+		for(int i = 0; i < size; i++)
 		{
-			north = new Position(col, row - 1);
+			
 		}
-		else if(row != 9)
-		{
-			south = new Position(col, row + 1);
-		}
-		
-		
 		
 		return null;
+	}
+	
+	
+	private Parity toParity(char initial)
+	{
+		switch(initial)
+		{
+			case 'A':
+				return Parity.A;
+			case 'B':
+				return Parity.B;
+			case 'C':
+				return Parity.C;
+			case 'S':
+				return Parity.S;
+			case 'D':
+				return Parity.D;
+			default:
+				return null;
+		}
 	}
 	
 	private boolean checkParity(Position pos)
