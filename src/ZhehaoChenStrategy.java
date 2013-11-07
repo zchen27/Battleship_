@@ -1,9 +1,5 @@
 import java.util.*;
 
-/*
- * 
- */
-
 public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 {	
 	private enum Status
@@ -28,22 +24,6 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 			this.name = c;
 		}
 
-	}
-	
-	private enum Direction
-	{
-		EAST (1, 0),
-		NORTH (0, -1),
-		WEST (-1, 0),
-		SOUTH(0, 1);
-		
-		final int dcol;
-		final int drow;
-		Direction(int c, int r)
-		{
-			dcol = c;
-			drow = r;
-		}
 	}
 	
 	private Status status;
@@ -168,6 +148,35 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		Position north = null;
 		Position south = null;
 		
+		if(col != 9)
+		{
+			east = new Position(col + 1, row);
+			targetStack.add(east);
+		}
+		else if(col != 0)
+		{
+			west = new Position(col - 1, row);
+			targetStack.add(west);
+		}
+		else
+		{
+			
+		}
+		
+		if(row != 0)
+		{
+			north = new Position(col, row - 1);
+			targetStack.add(north);
+		}
+		else if(row != 9)
+		{
+			south = new Position(col, row + 1);
+			targetStack.add(south);
+		}
+		else
+		{
+			
+		}
 		
 		for(int i = 0; i < size; i++)
 		{
