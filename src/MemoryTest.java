@@ -1,4 +1,4 @@
-
+import java.util.*;
 public class MemoryTest
 {
 	public static void main(String[] s)
@@ -14,5 +14,6 @@ public class MemoryTest
 		System.out.println("MAX MEMORY " + (max / m));
 		System.out.println("FREE MEMORY " + (free / m));
 		System.out.println("AVAILABLE CORES " + cpu);
+		
 	}
 }
