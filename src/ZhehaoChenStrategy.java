@@ -1,7 +1,26 @@
 import java.util.*;
+import java.lang.reflect.*;
 
 public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 {	
+	public static void main(String[] args)
+	{
+		ZhehaoChenStrategy strategy = new ZhehaoChenStrategy();
+		TargetStack<Position> stack = strategy.new TargetStack();
+		stack.add(new Position(1, 1));
+		stack.add(new Position(2, 1));
+		for(Object p: stack)
+		{
+			System.out.println(p);
+		}
+		stack.removePosition(new Position(1, 1));
+		for(Object p: stack)
+		{
+			System.out.println(p);
+		}
+		
+	}
+	
 	private enum Status
 	{
 		HUNT,
@@ -25,12 +44,54 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		}
 
 	}
-	
+        
+	private class TargetStack<E> extends ArrayList implements List
+	{
+		public boolean removePosition(Position p)
+		{
+			if(p == null)
+			{
+				for(int i = 0; i < super.size(); i++)
+				{
+					if(super.get(i) == null)
+					{
+						super.remove(i);
+						return true;
+					}
+				}
+			}
+			else
+			{
+				for(int i = 0; i < super.size(); i++)
+				{
+					try
+					{
+						Method columnIndex = super.get(i).getClass().getDeclaredMethod("columnIndex");
+						Method rowIndex =  super.get(i).getClass().getDeclaredMethod("rowIndex");
+						Object columnI = columnIndex.invoke(super.get(i));
+						Object rowI = rowIndex.invoke(super.get(i));
+						int col = (Integer) columnI;
+						int row = (Integer) rowI;
+						if(p.columnIndex() == col && p.rowIndex() == row)
+						{
+							super.remove(i);
+						}
+					}
+					catch (Exception e)
+					{
+						e.printStackTrace();
+					}
+					
+				}
+			}
+			return false;
+		}
+	}
 	
 	private Status status;
 	private Parity parity;
 	private HashSet<Parity> stillAlive;
-	private ArrayList<Position> targetStack;
+	private TargetStack<Position> targetStack;
 	
 	public ZhehaoChenStrategy()
 	{
@@ -48,7 +109,7 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		stillAlive.add(Parity.B);
 		stillAlive.add(Parity.A);
 		parity = Parity.D;
-		targetStack = new ArrayList();
+		targetStack = new TargetStack();
 	}
 	
 	@Override
@@ -104,6 +165,7 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 				target = '\u0000';
 			}
 		}
+		manageStack(hit, sunk, target, pos);
 	}
 	
 	private void manageStack(boolean hit, boolean sunk, char initial, Position lastShot)
@@ -123,7 +185,7 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		
 		if(sunk)
 		{
-			targetStack = new ArrayList();
+			targetStack = new TargetStack();
 		}
 		
 		
@@ -208,7 +270,7 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 	
 	private Position getNextTARGETTarget()
 	{
-		return targetStack.remove(0);
+		return (Position) targetStack.remove(0);
 	}
 	
 	
