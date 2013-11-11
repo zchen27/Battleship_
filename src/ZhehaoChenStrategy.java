@@ -101,6 +101,7 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 	@Override
 	public void startGame()
 	{
+		super.initializeGrid();
 		status = Status.HUNT;
 		stillAlive = new HashSet();
 		stillAlive.add(Parity.D);
@@ -221,13 +222,13 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		
 		if(getGrid().boatInitial(east) == initial || getGrid().boatInitial(west) == initial)
 		{
-			targetStack.remove(north);
-			targetStack.remove(south);
+			targetStack.removePosition(north);
+			targetStack.removePosition(south);
 		}
 		else if(getGrid().boatInitial(north) == initial || getGrid().boatInitial(south) == initial)
 		{
-			targetStack.remove(east);
-			targetStack.remove(west);
+			targetStack.removePosition(east);
+			targetStack.removePosition(west);
 		}
 		else
 		{
@@ -307,6 +308,7 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		{
 			return false;
 		}
+		
 		for(int i = 1; i < parity.parity; i++)
 		{
 			Position testE = null;
