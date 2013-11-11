@@ -1,5 +1,5 @@
-import java.util.*;
 import java.lang.reflect.*;
+import java.util.*;
 
 public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 {	
@@ -7,8 +7,8 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 	{
 		ZhehaoChenStrategy strategy = new ZhehaoChenStrategy();
 		TargetStack<Position> stack = strategy.new TargetStack();
-		stack.add(new Position(1, 1));
-		stack.add(new Position(2, 1));
+		stack.push(new Position(1, 1));
+		stack.push(new Position(2, 1));
 		for(Object p: stack)
 		{
 			System.out.println(p);
@@ -45,7 +45,7 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 
 	}
         
-	private class TargetStack<E> extends ArrayList implements List
+	private class TargetStack<E> extends ArrayList implements List, RandomAccess, Cloneable, java.io.Serializable
 	{
 		public boolean removePosition(Position p)
 		{
@@ -77,14 +77,23 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 							super.remove(i);
 						}
 					}
-					catch (Exception e)
+					catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e)
 					{
-						e.printStackTrace();
+						
 					}
-					
 				}
 			}
 			return false;
+		}
+		
+		public boolean push(E Position)
+		{
+			return super.add(Position);
+		}
+		
+		public E pop()
+		{
+			return (E) super.remove(super.size() - 1);
 		}
 	}
 	
@@ -193,12 +202,12 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		if(col != 9)
 		{
 			east = new Position(col + 1, row);
-			targetStack.add(east);
+			targetStack.push(east);
 		}
 		else if(col != 0)
 		{
 			west = new Position(col - 1, row);
-			targetStack.add(west);
+			targetStack.push(west);
 		}
 		else
 		{
@@ -208,12 +217,12 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 		if(row != 0)
 		{
 			north = new Position(col, row - 1);
-			targetStack.add(north);
+			targetStack.push(north);
 		}
 		else if(row != 9)
 		{
 			south = new Position(col, row + 1);
-			targetStack.add(south);
+			targetStack.push(south);
 		}
 		else
 		{
@@ -271,7 +280,7 @@ public class ZhehaoChenStrategy extends ComputerBattleshipPlayer
 	
 	private Position getNextTARGETTarget()
 	{
-		return (Position) targetStack.remove(0);
+		return (Position) targetStack.pop();
 	}
 	
 	
